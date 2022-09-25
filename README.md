@@ -16,6 +16,7 @@
 > 
 > 
 > *jangalah kita suka menunda*<br>
-> *bolehlah kita menumpang mandi*
+> *bolehlah kita menumpang mandi*<br>
+>                  -Ted Kaczynski
 
 <p>&nbsp;</p>

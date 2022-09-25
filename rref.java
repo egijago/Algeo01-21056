@@ -1,4 +1,4 @@
-public class reff{
+public class rref{
     static void displayMatrix(float[][] matrix){
         for (float[] i : matrix){
             System.out.print('[');
@@ -29,7 +29,7 @@ public class reff{
     static float[][] gauss(float[][] matrix){
         int n = matrix.length;
         int col_lead = 0;
-        for (int i=0;i<n-1;i++){
+        for (int i=0;i<n;i++){
             matrix = sortZero(matrix,col_lead,i);
             while (matrix[i][col_lead] == 0.0 && col_lead < matrix[0].length-2){
                 col_lead+=1;
@@ -84,6 +84,10 @@ public class reff{
             {2,-1,1,3,4},
             {5,2,-4,2,6}
         };
-        displayMatrix(gaussJordan(m));
+        float[][] m2 = {
+            {1,1,-1,1,0,0},
+            {2,5,-7,0,1,0},
+            {2,-1,1,0,0,1}};
+        displayMatrix(gaussJordan(m2));
     }
 }
