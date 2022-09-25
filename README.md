@@ -6,5 +6,5 @@ TUBES ALGEO MAHA ASYIK MAHA ANJAY MAHA ENJOY
 ## *bila ada sumur disawah*
 ## *bolehlah kita menumpang mandi*
 <p>&nbsp;</p>
-## *jangalah kita suka menunda*
-## *bolehlah kita menumpang mandi*
+*jangalah kita suka menunda*
+*bolehlah kita menumpang mandi*
