@@ -2,7 +2,7 @@
 
 <p>&nbsp;</p>
 
-# TUBES ALGEO MAHA ASYIK MAHA ANJAY MAHA ENJOY
+## TUBES ALGEO MAHA ASYIK MAHA ANJAY MAHA ENJOY
 
 <p>&nbsp;</p>
 
@@ -14,7 +14,6 @@
 *bila ada sumur disawah*<br>
 *bolehlah kita menumpang mandi*
 
-<p>&nbsp;</p>
 
 *jangalah kita suka menunda*<br>
 *bolehlah kita menumpang mandi*
