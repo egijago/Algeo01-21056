@@ -69,7 +69,7 @@ public class reff{
             }
             for (int row =0;row<i;row++){
                 float ratio = matrix[row][col_lead]/matrix[i][col_lead];
-                for (int col = 0;col<matrix[0].lengtvhh;col++){
+                for (int col = 0;col<matrix[0].length;col++){
                     matrix[row][col] -= (ratio * matrix[i][col]);
                 }
             }
