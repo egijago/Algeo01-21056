@@ -11,7 +11,7 @@
 - [x] SPL dengan Cramer 
 - [x] Determinan dengan reduksi baris 
 - [x] Determinan dengan ekspansi kofaktor 
-- [ ] Inverse matriks dengan adjoin (on going Egi)
+- [X] Inverse matriks dengan adjoin (on going Egi)
 - [x] Inverse matriks dengan Gauss-Jordan
 - [ ] Interpolasi Polinom (on going Hobert)
 - [ ] Interpolasi Bicubic 
