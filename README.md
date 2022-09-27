@@ -5,17 +5,17 @@
 **TUBES ALGEO MAHA ASYIK MAHA ANJAY MAHA ENJOY** 
 
 ### TODO LIST
-- [ ] SPL dengan Eliminasi Gauss
+- [x] SPL dengan Eliminasi Gauss
 - [x] SPL dengan Eliminasi Gauss-Jordan
 - [ ] SPL dengan Matriks Balikan
 - [x] SPL dengan Cramer 
 - [x] Determinan dengan reduksi baris 
 - [x] Determinan dengan ekspansi kofaktor 
-- [ ] Inverse matriks dengan adjoin
+- [ ] Inverse matriks dengan adjoin (on going Egi)
 - [x] Inverse matriks dengan Gauss-Jordan
-- [ ] Interpolasi Polinom 
-- [ ] Interpolasi Bicubic
-- [ ] Regresi Linier Berganda
+- [ ] Interpolasi Polinom (on going Hobert)
+- [ ] Interpolasi Bicubic 
+- [ ] Regresi Linier Berganda (on going Egi)
 - [ ] Handling File input
 - [ ] Handling File output
 - [ ] ADT Matrix dan operasi Matrix
