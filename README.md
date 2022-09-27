@@ -16,6 +16,9 @@
 - [ ] Interpolasi Polinom 
 - [ ] Interpolasi Bicubic
 - [ ] Regresi Linier Berganda
+- [ ] Handling File input
+- [ ] Handling File output
+- [ ] ADT Matrix dan operasi Matrix
 
 <p>&nbsp;</p>
 
