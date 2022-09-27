@@ -18,7 +18,7 @@
 - [ ] Regresi Linier Berganda (on going Egi)
 - [ ] Handling File input
 - [ ] Handling File output
-- [ ] ADT Matrix dan operasi Matrix
+- [ ] ADT Matrix dan operasi Matrix (on going Hobert)
 
 <p>&nbsp;</p>
 
