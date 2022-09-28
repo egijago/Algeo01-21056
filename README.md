@@ -15,7 +15,7 @@
 - [x] Inverse matriks dengan Gauss-Jordan
 - [ ] Interpolasi Polinom (on going Hobert)
 - [ ] Interpolasi Bicubic 
-- [ ] Regresi Linier Berganda (on going Egi)
+- [X] Regresi Linier Berganda 
 - [ ] Handling File input
 - [ ] Handling File output
 - [ ] ADT Matrix dan operasi Matrix (on going Hobert)
