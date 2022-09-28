@@ -2,7 +2,7 @@ import java.text.Format;
 import java.util.List;
 
 public class rref{
-    static void displayMatrix(float[][] matrix){
+    public static void displayMatrix(float[][] matrix){
         for (float[] i : matrix){
             System.out.print('[');
             for (float j : i) {
@@ -29,7 +29,7 @@ public class rref{
         return matrix;
     } 
 
-    static float[][] gauss(float[][] matrix){
+    public static float[][] gauss(float[][] matrix){
         int n = matrix.length;
         int col_lead = 0;
         for (int i=0;i<n;i++){
@@ -79,17 +79,24 @@ public class rref{
         }
         return matrix;
     }
-    // static elmCol (float[][] matrix, int col){
-    //     // belum beres
-    //     int m = matrix.length;
-    //     int n = matrix[0].length;
-    //     float[][] temp = new float[m][n-1];
-    //     for (int i =0;i<m;i++){
-    //         for (int j= 0; j<col;j++){
-    //             temp[i][j] = matrix[i][j];
-    //         }
-    //     }
-    // }   
+    static float [][] elmCol (float[][] matrix, int col){
+        // belum beres
+        int m = matrix.length;
+        int n = matrix[0].length;
+        float[][] temp = new float[m][n-1];
+        for (int i =0;i<m;i++){
+            for (int j= 0; j<temp.length;j++){
+                if (j<col){
+                    temp[i][j] = matrix[i][j];
+                }
+                else{
+                    //j>col
+                    temp[i][j] = matrix[i][j+1];
+                }
+            }
+        }
+        return temp;
+    }   
     static int searchInCol(String[][] matrix, int col, int val) {
         for (int i = 0;i<matrix.length;i++){
             if (Integer.valueOf(matrix[i][col])== val){
@@ -121,8 +128,10 @@ public class rref{
         return temp;
     }
 
+    
+
     static void solve(float[][] matrix){
-        String var[] ={"a","b","c","d","e","f","g","h","i","j"};
+        String var[] ={"s","t","u","v","w","x","y","z","a","b"};
         int idx = 0;
         String parameter[][] = new String[0][];
         for (int row = 0 ;row<matrix.length;row++){
@@ -197,8 +206,14 @@ public class rref{
             {1,1,-1,1,0,0},
             {2,5,-7,0,1,0},
             {2,-1,1,0,0,1}};
+
+        float[][] m3 = {
+            {1,1,1,1,1},
+            {1,1,0,0,0},
+            {0,0,0,0,0}
+        };
         // displayMatrix(gaussJordan(m2));
         displayMatrix(gaussJordan(m));
-        solve(gaussJordan(m));
+        solve(m3);
     }
 }

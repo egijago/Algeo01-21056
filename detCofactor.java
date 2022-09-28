@@ -10,10 +10,11 @@ public class detCofactor{
         }
     }
     static float[][] transpose(float[][] matrix){
-        int n = matrix.length;
-        float[][] temp = new float[n][n];
+        int m= matrix.length;
+        int n= matrix[0].length;
+        float[][] temp = new float[n][m];
         for (int i =0;i<n;i++){
-            for (int j = 0;j<n;j++){
+            for (int j = 0;j<m;j++){
                 temp[i][j] = matrix[j][i];
             }
         }
@@ -83,15 +84,90 @@ public class detCofactor{
         }
         return cofactor;
     }
+
+    
+    static float[][] multiply(float[][] m1,float[][] m2){
+        float [][] temp = new float[m1.length][m2[0].length];
+        for (int i=0;i<m1.length;i++){
+            for (int j =0;j<m2[0].length;j++){
+                temp[i][j] = 0;
+                for (int k = 0;k<m2.length;k++){
+                    temp[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+        return temp;
+    }
+
+    static void regression(float[][] matrix){
+        // yang di input augmented matrix
+
+        // inisialisasi matrix x dan y 
+        float[][] Y = new float[matrix.length][1];
+        float[][] X = new float[matrix.length][matrix[0].length];
+
+        // assign nilai ke matrix x, dan y
+        for (int i=0;i<matrix.length;i++ ){
+            Y[i][0] = matrix[i][matrix[0].length-1];
+            X[i][0] = 1;
+            for (int j =1;j<matrix[0].length;j++){
+                X[i][j] = matrix[i][j-1];
+            }
+        }
+        // B = (Xt X)' Xt y
+        float[][] B = multiply(multiply(inverse(multiply(transpose(X),X)),transpose(X)),Y);
+        displayMatrix(B);
+        String eq = "y =";
+        for (int i =0;i<B.length;i++){
+            if (B[i][0] == 0){
+                continue;
+            }
+            else {
+                if (i==0){
+                    eq += String.format(" %f",B[0][0]);
+                }
+                else {
+                    if (eq==""){
+                        eq += String.format(" (%f)X%d",B[i][0],i);
+                    }else{
+                        eq += String.format(" + (%f)X%d",B[i][0],i);
+                    }
+                }
+            }
+        }
+        System.out.println(eq);
+        }
+
+        public static void interpolation(float[][] titik){
+            int n = titik.length;
+            float[] y = new float[n];
+            for(int i = 0; i < n; i++){
+                y[i] = titik[i][1];
+            }
+            float[][] x = new float[n][n];
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
+                    x[i][j] = (float)Math.pow((double)titik[i][0],(double)j);
+                }
+            }
+            // sudah dpt matrix x, solve dengan salah satu metode SPL
+            cramer(x,y);
+            
+        }
+       
+    
+      
     public static void main(String[] args){
         float[][] m = {
-            {1,1,-1,-1},
-            {2,9,-7,-5},
-            {2,-1,1,3},
-            {5,2,-4,4}
+            {1,2},
+            {2,3},
+            {3,4},
+            {5,6},
+            {7,8}
         };
-        System.out.println(determinant(m));
-        displayMatrix(inverse(m));
-
+        // System.out.println(determinant(m));
+        // displayMatrix(inverse(m));
+        // interpolation(m);
+        interpolation(m);
     }
 }

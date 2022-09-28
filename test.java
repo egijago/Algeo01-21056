@@ -19,6 +19,39 @@ public class test{
         }
         return temp;
     }
+
+    static float[][] multiply(float[][] m1,float[][] m2){
+        float [][] temp = new float[m1.length][m2[0].length];
+        for (int i=0;i<m1.length;i++){
+            for (int j =0;j<m2[0].length;j++){
+                temp[i][j] = 0;
+                for (int k = 0;k<m2.length;k++){
+                    temp[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+        return temp;
+    }
+
+    static void regression(float[][] matrix){
+        // yang di input augmented matrix
+
+        // inisialisasi matrix x dan y 
+        float[] y = new float[matrix.length];
+        float[][] x = new float[matrix.length][matrix[0].length];
+
+        // assign nilai ke matrix x, dan y
+        for (int i=0;i<matrix.length;i++ ){
+            y[i] = matrix[i][matrix.length-1]
+            x[i][0] = 1;
+            for (int j =1;j<matrix.length;j++){
+                x[i][j] = matrix[i][j-1];
+            }
+        }
+        // B = (Xt X)' Xt y
+        float[][] B = multiply(transpose, m2)
+        
+    }
         
     public static void main(String[] args){
         float[] a = {1,2,3};
@@ -39,4 +72,5 @@ public class test{
         System.out.println(c==e);  
         }
     }
+
     
