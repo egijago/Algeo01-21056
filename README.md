@@ -7,18 +7,20 @@
 ### TODO LIST
 - [x] SPL dengan Eliminasi Gauss 
 - [x] SPL dengan Eliminasi Gauss-Jordan
-- [x] SPL dengan Matriks Balikan (on going sulthan)
+- [x] SPL dengan Matriks Balikan 
 - [x] SPL dengan Cramer 
 - [x] Determinan dengan reduksi baris 
 - [x] Determinan dengan ekspansi kofaktor 
 - [X] Inverse matriks dengan adjoin 
 - [x] Inverse matriks dengan Gauss-Jordan
-- [ ] Interpolasi Polinom (on going Hobert)
+- [x] Interpolasi Polinom 
 - [X] Interpolasi Bicubic 
 - [X] Regresi Linier Berganda 
 - [X] Handling File input
 - [X] Handling File output
-- [ ] ADT Matrix dan operasi Matrix (on going Hobert)
+- [x] ADT Matrix dan operasi Matrix 
+- [ ] Finishing Laporan 
+- [ ] Rapihkan source code dan struktur file
 
 <p>&nbsp;</p>
 
