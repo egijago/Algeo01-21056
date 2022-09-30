@@ -14,7 +14,7 @@ public class Interpolasi {
         }
 
         Matrix result = new Matrix(1,x.getNumCol());
-        result = Determinan.cramer(x, y);
+        result = SPL.cramer(x, y);
 
         double res = 0;
         for(int i = 0; i < result.getNumCol(); i++){
