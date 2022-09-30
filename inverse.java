@@ -77,7 +77,26 @@ public class inverse
             return false;
         }
     }
-    
+    public static void main(String[]args)
+    {
+        float[][] m = {
+            {1,1,-1,-3},
+            {1,2,1,7},
+            {2,1,1,4}
+        };
+        rref.displayMatrix(splinvers.inverssplaug(m));
+        float[][] A = {
+            {1,5,3},
+            {1,-2,9},
+            {2,1,-1}
+        };
+        float[][] b = {
+            {16},
+            {8},
+            {7}
+        };
+        rref.displayMatrix(splinvers.inversspl(A, b));
+    }
     
 
 }

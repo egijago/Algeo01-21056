@@ -2,9 +2,11 @@ public class splinvers {
     //Bukan Augmented
     static float[][] inversspl (float[][]A,float[][]b)
     {
-        inverse.invrs(A);
+        
         int sqr = A.length;
+        float[][] invers = new float[sqr][sqr];
         float[][] hasil= new float[sqr][1];
+        invers = inverse.invrs(A);
         for (int k = 0;k<sqr;k++)
         {
             hasil[k][0]=0;
@@ -14,7 +16,7 @@ public class splinvers {
             for(int j=0;j<sqr;j++)
             {
                 
-                hasil[i][0]=hasil[i][0]+A[i][j]*b[j][0];
+                hasil[i][0]=hasil[i][0]+invers[i][j]*b[j][0];
             }
         }
         return hasil;
@@ -47,18 +49,23 @@ public class splinvers {
 //tinggal kopas codenya 
     public static void main(String[] args){
         float[][] m = {
-            {1,-1,2,-1},
-            {2,1,-2,-2},
-            {-1,2,-4,1},
-            {3,0,0,-3},
+            {1,5,3,16},
+            {1,-2,9,8},
+            {2,1,-1,7}
         };
+        
         int col = m[0].length-1;
         int row = m.length;
+        float [][] solusi = new float [row][1];
         if(row==col)
         {
             if(inverse.isInvrs(m))
             {
-                reff.displayMatrix(inverssplaug(m));
+                solusi = inverssplaug(m);
+                for (int i=0;i<row;i++)
+                {
+                    System.out.printf("x%d=%.2f\n",i+1,solusi[i][0]);
+                }
             }
             else
             {
@@ -79,22 +86,26 @@ public class splinvers {
    
     
         float[][] A = {
-            {1,-1,2,-1,4},
-            {2,1,-2,-2,3},
-            {-1,2,-4,1,2},
-            {3,0,0,-3,1},
+            {1,2,-1},
+            {1,2,1},
+            {2,1,1}
         };
         float[][] b = {
-            {2},
-            {4},
-            {6},
-            {8}
+            {3},
+            {7},
+            {4}
         };
+        row = A.length;
+        float [][] solusi1 = new float [row][1];
         if(inverse.isSquare(A))
         {
             if(inverse.isInvrs(A))
             {
-                inversspl(A, b);
+                for (int i=0;i<row;i++)
+                {
+                    solusi1 = inversspl(A, b);
+                    System.out.printf("x%d=%.2f\n",i+1,solusi1[i][0]);
+                }
             }
             else
             {
