@@ -15,7 +15,7 @@ public class RLB {
             }
         }
 
-        Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(inverseCofactor(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
+        Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(Inverse.inverseCofactor(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
 
         b.displayMatrix();
         String eq = "y =";
