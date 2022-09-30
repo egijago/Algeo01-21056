@@ -177,15 +177,80 @@ public class SPL {
                 
             }
         }
+//------------------------------------------------------
+//--------------------Cramer----------------------------
+//------------------------------------------------------
+    public static Matrix replaceCol(Matrix matrix, Matrix rep, int col){
+        int kolom = matrix.getNumRow();
+        Matrix copy = Matrix.copyMatrix(matrix);
+        for(int i=0; i<kolom; i++){
+            copy.setELMT(i, col, rep.getELMT(0, i));
+        }
+        return copy;
+    }
+    public static Matrix cramer(Matrix matrix, Matrix hasil){
+        int n = matrix.getNumRow();
+        Matrix result = new Matrix(1,n);
+        Matrix copy = Matrix.copyMatrix(matrix);
+        double det = Determinan.detRowRed(matrix);
 
+        if(det != 0){
+            for(int i=0; i<n; i++){
+                Matrix mat = replaceCol(copy,hasil,i);
+                result.setELMT(0, i, Determinan.detRowRed(mat)/det); 
+            }
+
+            System.out.println("Hasil SPL:");
+            for(int i=0; i<n; i++){
+                System.out.printf("x%d = %.2f\n",i+1,result.getELMT(0, i));
+            }
+        }else{
+            System.out.println("SPL tidak mempunyai solusi tunggal.");
+        }
+        return result;
+    }
+    static Matrix inversspl (Matrix A,Matrix b)
+    {
+        
+        int sqr = A.getNumRow();
+        Matrix invers = new Matrix(sqr, sqr);
+        Matrix hasil= new Matrix(sqr, 1);
+        if(A.isSquare())
+        {
+            if(Determinan.detRowRed(A)!=0)
+            {
+                
+                invers = Inverse.inverseGJ(A);
+                for (int k = 0;k<sqr;k++)
+                {
+                    hasil.setELMT(sqr, k, 0);
+                }
+                for (int i=0;i<sqr;i++)
+                {
+                    for(int j=0;j<sqr;j++)
+                    {
+                        hasil.setELMT(i, 0, hasil.getELMT(i, 0)+invers.getELMT(i, j)*b.getELMT(j, 0));
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Matriks tidak mempunyai balikan");
+                System.out.println("SPL tidak memiliki solusi");
+            }
+        }
+        else
+        {
+            System.out.println("Matriks tidak berbetuk square");
+            System.out.println("tidak dapat menyelesaikan SPL dengan matriks balikan");
+        }
+        
+        return hasil;
+    }
 
     public static void main(String[] args){
-        double[][] m = {
-            {1,1,-1,-1,1},
-            {2,5,-7,-5,-2},
-            {2,-1,1,3,4},
-            {5,2,-4,2,6}
-        };
+        
+        
 
         Matrix test = new Matrix(4,5);
         test.setELMT(0,0,1);
@@ -208,16 +273,7 @@ public class SPL {
         test.setELMT(3,2,-4);
         test.setELMT(3,3,2);
         test.setELMT(3,4,6);
-        float[][] m2 = {
-            {1,1,-1,1,0,0},
-            {2,5,-7,0,1,0},
-            {2,-1,1,0,0,1}};
 
-        float[][] m3 = {
-            {1,1,1,1,1},
-            {1,1,0,0,0},
-            {0,0,0,0,0}
-        };
         // displayMatrix(gaussJordan(m2))
         Matrix hasil = new Matrix();
         hasil = gaussJordan(test);

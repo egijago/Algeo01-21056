@@ -1,6 +1,5 @@
-
-public class inverse 
-{
+public class invrs12{
+    
     static float[][] invrs (float[][] M)
     {
 
@@ -97,6 +96,4 @@ public class inverse
         };
         rref.displayMatrix(splinvers.inversspl(A, b));
     }
-    
-
 }
