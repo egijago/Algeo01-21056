@@ -14,7 +14,7 @@
 - [X] Inverse matriks dengan adjoin 
 - [x] Inverse matriks dengan Gauss-Jordan
 - [ ] Interpolasi Polinom (on going Hobert)
-- [ ] Interpolasi Bicubic 
+- [X] Interpolasi Bicubic 
 - [X] Regresi Linier Berganda 
 - [ ] Handling File input
 - [ ] Handling File output
