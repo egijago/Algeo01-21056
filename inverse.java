@@ -30,7 +30,7 @@ public class inverse
                 }
             }
         }
-        gaussJordan(invers);
+        rref.gaussJordan(invers);
         for(int i = 0; i<sqr;i++)
         {
             for (int j = sqr;j<2*sqr;j++)
@@ -47,7 +47,7 @@ public class inverse
     //Apakah Matriks bisa di invers atau tidak
     {
         float sqr = M.length;
-        gauss(M);
+        rref.gauss(M);
         float det = 1;
         for(int i=0;i<sqr;i++)
         {
@@ -62,6 +62,22 @@ public class inverse
             return true;
         }
     }
+    static boolean isSquare(float[][]M)
+    //Apakah matriks square atau tidak
+    {
+        int col = M[0].length;
+        int row = M.length;
+
+        if(row==col)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     
 
 }
