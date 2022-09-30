@@ -3,15 +3,6 @@ import java.math.RoundingMode;
 
 public class Determinan {
 
-    public static Matrix replaceCol(Matrix matrix, Matrix rep, int col){
-        int numRow = matrix.getNumRow();
-        Matrix copy = Matrix.copyMatrix(matrix);
-        for(int i = 0; i < numRow; i++){
-            copy.setELMT(i, col, rep.getELMT(0, i));
-        }
-        return copy;
-    }
-
     public static Matrix subMatrix(Matrix matrix, int xRow, int xCol){
         int n = matrix.getNumRow();
         Matrix temp = new Matrix(n-1,n-1);

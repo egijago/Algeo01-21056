@@ -222,7 +222,7 @@ public class SPL {
         Matrix hasil = new Matrix();
         hasil = gaussJordan(test);
         hasil.displayMatrix();
-        solve(test);
+        solve(hasil);
         
     }
 }
