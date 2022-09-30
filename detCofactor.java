@@ -151,7 +151,7 @@ public class detCofactor{
                 }
             }
             // sudah dpt matrix x, solve dengan salah satu metode SPL
-            cramer(x,y);
+            determinan.cramer(x,y);
             
         }
        
