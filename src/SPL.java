@@ -209,6 +209,44 @@ public class SPL {
         }
         return result;
     }
+    static Matrix inversspl (Matrix A,Matrix b)
+    {
+        
+        int sqr = A.getNumRow();
+        Matrix invers = new Matrix(sqr, sqr);
+        Matrix hasil= new Matrix(sqr, 1);
+        if(A.isSquare())
+        {
+            if(Determinan.detRowRed(A)!=0)
+            {
+                
+                invers = Inverse.inverseGJ(A)
+                for (int k = 0;k<sqr;k++)
+                {
+                    hasil.setELMT(sqr, k, 0);
+                }
+                for (int i=0;i<sqr;i++)
+                {
+                    for(int j=0;j<sqr;j++)
+                    {
+                        hasil.setELMT(i, 0, hasil.getELMT(i, 0)+invers.getELMT(i, j)*b.getELMT(j, 0));
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Matriks tidak mempunyai balikan");
+                System.out.println("SPL tidak memiliki solusi");
+            }
+        }
+        else
+        {
+            System.out.println("Matriks tidak berbetuk square");
+            System.out.println("tidak dapat menyelesaikan SPL dengan matriks balikan");
+        }
+        
+        return hasil;
+    }
 
     public static void main(String[] args){
         double[][] m = {
