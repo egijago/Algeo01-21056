@@ -220,7 +220,7 @@ public class SPL {
             if(Determinan.detRowRed(A)!=0)
             {
                 
-                invers = Inverse.inverseGJ(A)
+                invers = Inverse.inverseGJ(A);
                 for (int k = 0;k<sqr;k++)
                 {
                     hasil.setELMT(sqr, k, 0);
@@ -249,12 +249,8 @@ public class SPL {
     }
 
     public static void main(String[] args){
-        double[][] m = {
-            {1,1,-1,-1,1},
-            {2,5,-7,-5,-2},
-            {2,-1,1,3,4},
-            {5,2,-4,2,6}
-        };
+        
+        
 
         Matrix test = new Matrix(4,5);
         test.setELMT(0,0,1);
@@ -277,16 +273,7 @@ public class SPL {
         test.setELMT(3,2,-4);
         test.setELMT(3,3,2);
         test.setELMT(3,4,6);
-        float[][] m2 = {
-            {1,1,-1,1,0,0},
-            {2,5,-7,0,1,0},
-            {2,-1,1,0,0,1}};
 
-        float[][] m3 = {
-            {1,1,1,1,1},
-            {1,1,0,0,0},
-            {0,0,0,0,0}
-        };
         // displayMatrix(gaussJordan(m2))
         Matrix hasil = new Matrix();
         hasil = gaussJordan(test);
