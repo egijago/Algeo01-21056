@@ -177,7 +177,38 @@ public class SPL {
                 
             }
         }
+//------------------------------------------------------
+//--------------------Cramer----------------------------
+//------------------------------------------------------
+    public static Matrix replaceCol(Matrix matrix, Matrix rep, int col){
+        int kolom = matrix.getNumRow();
+        Matrix copy = Matrix.copyMatrix(matrix);
+        for(int i=0; i<kolom; i++){
+            copy.setELMT(i, col, rep.getELMT(0, i));
+        }
+        return copy;
+    }
+    public static Matrix cramer(Matrix matrix, Matrix hasil){
+        int n = matrix.getNumRow();
+        Matrix result = new Matrix(1,n);
+        Matrix copy = Matrix.copyMatrix(matrix);
+        double det = Determinan.detRowRed(matrix);
 
+        if(det != 0){
+            for(int i=0; i<n; i++){
+                Matrix mat = replaceCol(copy,hasil,i);
+                result.setELMT(0, i, Determinan.detRowRed(mat)/det); 
+            }
+
+            System.out.println("Hasil SPL:");
+            for(int i=0; i<n; i++){
+                System.out.printf("x%d = %.2f\n",i+1,result.getELMT(0, i));
+            }
+        }else{
+            System.out.println("SPL tidak mempunyai solusi tunggal.");
+        }
+        return result;
+    }
 
     public static void main(String[] args){
         double[][] m = {
