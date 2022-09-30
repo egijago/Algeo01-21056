@@ -7,7 +7,7 @@
 ### TODO LIST
 - [x] SPL dengan Eliminasi Gauss 
 - [x] SPL dengan Eliminasi Gauss-Jordan
-- [ ] SPL dengan Matriks Balikan (on going sulthan)
+- [x] SPL dengan Matriks Balikan (on going sulthan)
 - [x] SPL dengan Cramer 
 - [x] Determinan dengan reduksi baris 
 - [x] Determinan dengan ekspansi kofaktor 
