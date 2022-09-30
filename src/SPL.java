@@ -114,30 +114,30 @@ public class SPL {
 
     
 
-    static void solve(float[][] matrix){
+    static void solve(Matrix matrix){
         String var[] ={"s","t","u","v","w","x","y","z","a","b"};
         int idx = 0;
         String parameter[][] = new String[0][];
-        for (int row = 0 ;row<matrix.length;row++){
+        for (int row = 0 ;row<matrix.getNumRow();row++){
             int col_lead = 0;
-            while (matrix[row][col_lead]==0){
-                if (col_lead >= matrix[0].length-2){
+            while (matrix.getELMT(row, col_lead)==0){
+                if (col_lead >= matrix.getNumCol()-2){
                     break;
                 }
                 col_lead +=1;
             }
-            if (matrix[row][col_lead]==0 && matrix[row][col_lead+1] == 0){
+            if (matrix.getELMT(row, col_lead)==0 && matrix.getELMT(row, col_lead+1) == 0){
                 // eq 0 = 0
                 continue;
             }
-            else if (matrix[row][col_lead] == 0 && matrix[row][col_lead+1] != 0){
+            else if (matrix.getELMT(row, col_lead) == 0 && matrix.getELMT(row, col_lead+1) != 0){
                 System.out.println("Unsolvable");
             }
 
             String eq = "";
             // Assign parameter ke variable selain leading one
-            for (int col = col_lead+1;col<matrix[0].length-1;col++){
-                if (matrix[row][col]==0){
+            for (int col = col_lead+1;col<matrix.getNumCol()-1;col++){
+                if (matrix.getELMT(row, col)==0){
                     continue;
                 }
                 else if (searchInCol(parameter,0,col+1) == -1){
@@ -149,28 +149,28 @@ public class SPL {
                 }
                 // Variable sudah di assing ke parameter
                 if (eq==""){
-                    float coef = -1 * matrix[row][col];
+                    double coef = -1 * matrix.getELMT(row, col);
                     eq += String.format("(%f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
                 else {
-                    float coef = -1 * matrix[row][col];
+                    double coef = -1 * matrix.getELMT(row, col);
                     eq += String.format("+ (%f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
             }
             if (eq==""){
-                if (matrix[row][col_lead]==0){
-                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%f)",matrix[row][matrix[0].length-1]);
+                if (matrix.getELMT(row, col_lead)==0){
+                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 else{
-                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("(%f)",matrix[row][matrix[0].length-1]);
+                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("(%f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 }
             else {
-                if (matrix[row][matrix[0].length-1] == 0){
+                if (matrix.getELMT(row, matrix.getNumCol()-1) == 0){
                     eq = String.format("X%d = ",col_lead+1) + eq;
                 }
                 else {
-                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("+ (%f)",matrix[row][matrix[0].length-1]);
+                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("+ (%f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
             }
             System.out.println(eq);
@@ -222,6 +222,7 @@ public class SPL {
         Matrix hasil = new Matrix();
         hasil = gaussJordan(test);
         hasil.displayMatrix();
+        solve(test);
         
     }
 }
