@@ -37,7 +37,7 @@ public class Bicubic {
     static Matrix inverseGJ(Matrix matrix) {
         Matrix bond = bindHorizontal(matrix,identity(matrix.getNumRow()));
         // bond = gaussJordan(bond);
-        bond = gaussJordan(bond);
+        bond = SPL.gaussJordan(bond);
         bond = cutCol(bond,matrix.getNumRow(),(matrix.getNumRow()*2)-1);
         return bond;
     }
