@@ -7,14 +7,14 @@
 ### TODO LIST
 - [x] SPL dengan Eliminasi Gauss 
 - [x] SPL dengan Eliminasi Gauss-Jordan
-- [ ] SPL dengan Matriks Balikan (on going sulthan)
+- [x] SPL dengan Matriks Balikan (on going sulthan)
 - [x] SPL dengan Cramer 
 - [x] Determinan dengan reduksi baris 
 - [x] Determinan dengan ekspansi kofaktor 
 - [X] Inverse matriks dengan adjoin 
 - [x] Inverse matriks dengan Gauss-Jordan
 - [ ] Interpolasi Polinom (on going Hobert)
-- [ ] Interpolasi Bicubic 
+- [X] Interpolasi Bicubic 
 - [X] Regresi Linier Berganda 
 - [ ] Handling File input
 - [ ] Handling File output
