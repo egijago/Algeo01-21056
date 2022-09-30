@@ -1,28 +1,8 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class determinan {
 
-    public static void main(String[] args){
-        float[][] matrix = {
-            {1,0,0},
-            {0,1,0},
-            {0,0,1}
-        };
-
-        float[][] m = {
-            {1,3,4,5,6},
-            {5,4,2,3,1},
-            {7,4,2,1,4},
-            {2,7,3,2,5},
-            {6,1,6,9,0}
-        };
-
-        float[] n = {10,2,3};
-
-        cramer(matrix,n);
-        System.out.printf("%f",determinan(m));
-    }
+public class interpolasi {
     public static float[][] copy_matrix(float[][] matrix){
         int n = matrix.length;
         float copy[][] = new float[n][n];
@@ -124,5 +104,42 @@ public class determinan {
             System.out.println("SPL tidak mempunyai solusi tunggal.");
         }
         return result;
+    }
+
+    public static double interpolation(float[][] titik, double absis){
+        int n = titik.length;
+        float[] y = new float[n];
+        for(int i = 0; i < n; i++){
+            y[i] = titik[i][1];
+        }
+        float[][] x = new float[n][n];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                x[i][j] = (float)Math.pow((double)titik[i][0],(double)j);
+            }
+        }
+        // sudah dpt matrix x, solve dengan salah satu metode SPL
+        double [] result = cramer(x,y);
+        double val = 0;
+        for (int i = 0;i<result.length;i++){
+            val += result[i] * Math.pow(absis,(double)i);
+        }
+        System.out.println(val);
+        return val;
+
+    }
+
+    public static void main(String[] args) {
+        float[][] m = {
+            {1,4},
+            {3,4},
+            {2,6},
+            {5,8},
+            {9,15}
+        };
+        // System.out.println(determinant(m));
+        // displayMatrix(inverse(m));
+        // interpolation(m);
+        interpolation(m,0);
     }
 }
