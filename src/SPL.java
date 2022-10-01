@@ -278,27 +278,23 @@ public class SPL {
 //-----------------------------------------------------------------------
 //---------------------Output File---------------------------------------
 //-----------------------------------------------------------------------
-    public static void fileInversspl(Matrix matrix, String path){
+    public static String SPLInverseToString(Matrix matrix){
         String str = "Hasil SPL:\n";
         for(int col = 0; col < matrix.getNumCol(); col++){
             str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
         }
-        try{
-            FileWriter writer = new FileWriter(path);
-            writer.write(str);
-            writer.close();
-            System.out.println("Berhasil menulis matrix ke dalam file.");
-        } catch (IOException e){
-            System.out.println("Gagal menulis matrix ke file.");
-            e.printStackTrace();
-        }
+        return str;
     }
 
-    public static void fileCramer(Matrix matrix, String path){
+    public static String cramerToString(Matrix matrix){
         String str = "Hasil SPL:\n";
         for(int col = 0; col < matrix.getNumCol(); col++){
             str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
         }
+        return str;
+    }
+
+    public static void StringToFile(String str, String path){
         try{
             FileWriter writer = new FileWriter(path);
             writer.write(str);
@@ -316,7 +312,8 @@ public class SPL {
         testing = IO.FileToMatrix("../test/test4.txt");
         Matrix hasil = new Matrix();
         hasil = inversspl(testing);
-        fileInversspl(hasil,"../test/cramsku.txt");
+        String res = SPLInverseToString(hasil);
+        StringToFile(res,"../test/cramskut.txt");
         // solve(hasil);
     }
 }
