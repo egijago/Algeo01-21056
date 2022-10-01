@@ -19,7 +19,7 @@ public class Inverse {
                 }
             }
         }
-        SPL.gaussJordan(invers);
+        invers = SPL.rref(invers);
 
         for(int i = 0; i < n; i++){
             for(int j = n; j < 2*n; j++){
@@ -59,6 +59,6 @@ public class Inverse {
     public static void main(String[] args) {
         Matrix testing = IO.FileToMatrix("../test/testinvers.txt");
         Matrix hasil = inverseGJ(testing);
-        fileInverse(hasil, "../test/hasilinversgj.txt");
+        fileInverse(hasil, "../test/hasilinversgjssss.txt");
     }
 }

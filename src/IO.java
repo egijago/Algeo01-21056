@@ -3,10 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileWriter;   
 import java.io.IOException;
-import javafx.util.*;
 
 public class IO {
-    public static Pair<>
     public static Matrix append(Matrix list1, Matrix list2){
         Matrix temp = new Matrix(1,list1.getNumCol()+list2.getNumCol());
         for(int i = 0; i < list1.getNumCol(); i++){

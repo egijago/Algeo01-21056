@@ -1,5 +1,4 @@
-import java.text.Format;
-import java.util.List;
+
 import java.io.FileWriter;
 import java.io.IOException;
 public class SPL {
@@ -15,7 +14,7 @@ public class SPL {
 
     public static String gauss(Matrix matrix){
         //Mengembalikan solusi spl dari matrix augmented mat
-    
+        int n = matrix.getNumRow();
         //Melakukan OBE hingga terbentuk eselon reduksi
         matrix = ref(matrix);
 
@@ -163,20 +162,21 @@ public class SPL {
     static String solve(Matrix matrix){
         //  Mengembalikan solusi SPL dari matrix yang telah dalam formasi eselon tereduksi
         // Mengembalikan "SPL tidak memiliki solusi." jika SPL tidak ada solusi.
-        for (int row = 0 ;row<matrix.getNumRow();row++){
-            int col_lead = 0;
-            while (matrix.getELMT(row, col_lead)==0){
+        int col_lead = 0;
+        String spl = "";
+        for (int rows = 0 ;rows<matrix.getNumRow();rows++){
+            col_lead = 0;
+            while (matrix.getELMT(rows, col_lead)==0){
                 if (col_lead >= matrix.getNumCol()-2){
                     break;
                 }
                 col_lead +=1;
             }
             // Ditemukan eq : 0 = c , c =/= 0
-            if (matrix.getELMT(row, col_lead) == 0 && matrix.getELMT(row, col_lead+1) != 0){
+            if (matrix.getELMT(rows, col_lead) == 0 && matrix.getELMT(rows, col_lead+1) != 0){
                 return ("SPL tidak memiliki solusi.");
             }
         
-        String spl ="";
 
         // List of parameter
         String var[] ={"s","t","u","v","w","x","y","z","a","b","c","d","e","e","f","g","h","i","j","k","l","m","n","o","p","q","r"};
@@ -185,7 +185,7 @@ public class SPL {
         int idx = 0;
         String parameter[][] = new String[0][];
         for (int row = 0 ;row<matrix.getNumRow();row++){
-            int col_lead = 0;
+            col_lead = 0;
             while (matrix.getELMT(row, col_lead)==0){
                 if (col_lead >= matrix.getNumCol()-2){
                     break;
@@ -376,10 +376,6 @@ public class SPL {
     public static void main(String[] args){
         Matrix testing = new Matrix();
         testing = IO.FileToMatrix("../test/test4.txt");
-        Matrix hasil = new Matrix();
-        hasil = inversspl(testing);
-        String res = SPLInverseToString(hasil);
-        StringToFile(res,"../test/cramskut.txt");
-        // solve(hasil);
+        System.out.println(gaussJordan(testing));
     }
 }

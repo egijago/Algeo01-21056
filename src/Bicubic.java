@@ -34,13 +34,13 @@ public class Bicubic {
         }
         return temp;
     }
-    static Matrix inverseGJ(Matrix matrix) {
-        Matrix bond = bindHorizontal(matrix,identity(matrix.getNumRow()));
-        // bond = gaussJordan(bond);
-        bond = SPL.gaussJordan(bond);
-        bond = cutCol(bond,matrix.getNumRow(),(matrix.getNumRow()*2)-1);
-        return bond;
-    }
+    // static Matrix inverseGJ(Matrix matrix) {
+    //     Matrix bond = bindHorizontal(matrix,identity(matrix.getNumRow()));
+    //     // bond = gaussJordan(bond);
+    //     bond = SPL.gaussJordan(bond);
+    //     bond = cutCol(bond,matrix.getNumRow(),(matrix.getNumRow()*2)-1);
+    //     return bond;
+    // }
     static Matrix multiply(Matrix m1,Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(), m2.getNumCol());
         for (int i=0;i<m1.getNumRow();i++){
@@ -53,11 +53,7 @@ public class Bicubic {
         }
         return temp;
     }
-<<<<<<< HEAD
-    static double bicubicInterpolation(Matrix matrix,float a,float b){
-=======
-    static void bicubicInterpolation(Matrix matrix,double a,double b){
->>>>>>> 1e64ef251bb93ad819c7f66b620a02557a163e7e
+    static String bicubicInterpolation(Matrix matrix,double a,double b){
         // akan dicari melalui ekspresi f(x,y) = X.A;
         // arrange matrix X;
         Matrix X = new Matrix(16, 16);
@@ -71,7 +67,7 @@ public class Bicubic {
             }
         }
         // X inverse
-        Matrix Xinv = inverseGJ(X);
+        Matrix Xinv = Inverse.inverseGJ(X);
 
         // matrix f(x,y)
         Matrix f = new Matrix(16, 1);
@@ -90,13 +86,8 @@ public class Bicubic {
             res += A.getELMT(k, 0)*Math.pow(a,i)*Math.pow(b,j);
         }
         System.out.println(res);
-<<<<<<< HEAD
-        return res;
+        String hasil = String.format("%f",res);
 
+        return hasil; 
     }
-
-=======
-    
-    }
->>>>>>> 1e64ef251bb93ad819c7f66b620a02557a163e7e
 }
