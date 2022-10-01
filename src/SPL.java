@@ -185,30 +185,50 @@ public class SPL {
         }
         return copy;
     }
-    public static Matrix cramer(Matrix matrix, Matrix hasil){
-        int n = matrix.getNumRow();
+    public static Matrix cramer(Matrix matrix){
+        int row = matrix.getNumRow();
+        int col = matrix.getNumCol();
+
+        Matrix square = new Matrix(row,col-1);
+        Matrix hasil = new Matrix(1,row);
+        
+        Matrix.splitAugmentedMatrix(matrix, square, hasil);
+        int n = square.getNumRow();
         Matrix result = new Matrix(1,n);
-        Matrix copy = Matrix.copyMatrix(matrix);
-        double det = Determinan.detRowRed(matrix);
+        Matrix copy = Matrix.copyMatrix(square);
 
-        if(det != 0){
-            for(int i=0; i<n; i++){
-                Matrix mat = replaceCol(copy,hasil,i);
-                result.setELMT(0, i, Determinan.detRowRed(mat)/det); 
-            }
+        if(square.isSquare()){
+            double det = Determinan.detRowRed(square);
 
-            System.out.println("Hasil SPL:");
-            for(int i=0; i<n; i++){
-                System.out.printf("x%d = %.2f\n",i+1,result.getELMT(0, i));
+            if(det != 0){
+                for(int i=0; i<n; i++){
+                    Matrix mat = replaceCol(copy,hasil,i);
+                    result.setELMT(0, i, Determinan.detRowRed(mat)/det); 
+                }
+
+                System.out.println("Hasil SPL:");
+                for(int i=0; i<n; i++){
+                    System.out.printf("x%d = %.2f\n",i+1,result.getELMT(0, i));
+                }
+            }else{
+                System.out.println("SPL tidak mempunyai solusi tunggal. silakan coba dengan metode lain.");
             }
         }else{
-            System.out.println("SPL tidak mempunyai solusi tunggal.");
+            System.out.println("SPL tidak dapat dicari dengan metode cramer, silakan coba metode lain.");
         }
         return result;
     }
-    static Matrix inversspl (Matrix A,Matrix b)
-    {
-        
+
+    
+    static Matrix inversspl (Matrix augmented) // agumented
+    {   
+        int row = augmented.getNumRow();
+        int col = augmented.getNumCol();
+        Matrix A = new Matrix(row,col-1);
+        Matrix b = new Matrix(1,row);
+
+        Matrix.splitAugmentedMatrix(augmented, A, b);
+
         int sqr = A.getNumRow();
         Matrix invers = new Matrix(sqr, sqr);
         Matrix hasil= new Matrix(sqr, 1);

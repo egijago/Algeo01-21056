@@ -1,7 +1,6 @@
 public class Interpolasi {
     public static double Interpolation(Matrix titik, double absis){
-        Matrix x = new Matrix(titik.getNumRow(), titik.getNumRow());
-        Matrix y = new Matrix(1, titik.getNumRow());
+        Matrix x = new Matrix(titik.getNumRow(), titik.getNumRow()+1);
 
         for(int i = 0; i < titik.getNumRow(); i++){
             for(int j = 0; j < titik.getNumRow(); j++){
@@ -10,11 +9,11 @@ public class Interpolasi {
         }
 
         for(int i = 0; i < titik.getNumRow(); i++){
-            y.setELMT(0, i, titik.getELMT(i,1));
+            x.setELMT(i, titik.getNumRow(), titik.getELMT(i,1));
         }
 
-        Matrix result = new Matrix(1,x.getNumCol());
-        result = SPL.cramer(x, y);
+        Matrix result = new Matrix(1,x.getNumRow());
+        result = SPL.cramer(x);
 
         double res = 0;
         for(int i = 0; i < result.getNumCol(); i++){

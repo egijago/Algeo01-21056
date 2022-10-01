@@ -167,4 +167,17 @@ public class Matrix {
             matrix.setELMT(row, i, k * matrix.getELMT(row, i));
         }
     }
+
+    public static void splitAugmentedMatrix(Matrix augmented, Matrix square, Matrix hasil){
+        int colSquare = augmented.getNumCol()-1;
+        int rowSquare = augmented.getNumRow();
+        for(int i = 0; i < rowSquare; i++){
+            for(int j = 0; j < colSquare; j++){
+                square.setELMT(i,j, augmented.getELMT(i, j));
+            }
+        }
+        for(int k = 0; k < rowSquare; k++){
+            hasil.setELMT(0,k, augmented.getELMT(k, colSquare));
+        }
+    }
 }
