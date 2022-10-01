@@ -265,7 +265,24 @@ public class SPL {
         
         return hasil;
     }
-
+//-----------------------------------------------------------------------
+//---------------------Input File---------------------------------------
+//-----------------------------------------------------------------------
+    public static void fileInversspl(Matrix matrix, String path){
+        String str = "";
+        for(int col = 0; col < matrix.getNumCol(); col++){
+            str += String.format("X%d= %f\n", col+1, matrix.getELMT(0, col))
+        }
+        try{
+            FileWriter writer = new FileWriter(path);
+            writer.write(str);
+            writer.close();
+            System.out.println("Berhasil menulis matrix ke dalam file.");
+        } catch (IOException e){
+            System.out.println("Gagal menulis matrix ke file.");
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args){
         Matrix tesgaus = new Matrix();
         tesgaus = IO.FileToMatrix("../test/test1.txt");
