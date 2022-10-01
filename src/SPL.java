@@ -185,7 +185,7 @@ public class SPL {
         }
         return copy;
     }
-    public static Matrix cramer(Matrix matrix){
+    public static Matrix cramer(Matrix matrix, boolean print){
         int row = matrix.getNumRow();
         int col = matrix.getNumCol();
 
@@ -206,15 +206,21 @@ public class SPL {
                     result.setELMT(0, i, Determinan.detRowRed(mat)/det); 
                 }
 
-                System.out.println("Hasil SPL:");
-                for(int i=0; i<n; i++){
-                    System.out.printf("x%d = %.2f\n",i+1,result.getELMT(0, i));
+                if(print){
+                    System.out.println("Hasil SPL:");
+                    for(int i=0; i<n; i++){
+                        System.out.printf("x%d = %.3f\n",i+1,result.getELMT(0, i));
+                }
                 }
             }else{
-                System.out.println("SPL tidak mempunyai solusi tunggal. silakan coba dengan metode lain.");
+                if(print){
+                    System.out.println("Matrix tidak memiliki solusi tunggal, silakan coba metode lain untuk penyelesaian.");
+                }
             }
         }else{
-            System.out.println("SPL tidak dapat dicari dengan metode cramer, silakan coba metode lain.");
+            if(print){
+                System.out.println("Matrix tidak berbentuk persegi, persoalan tidak dapat diselesaikan dengan cramer.");
+            }
         }
         return result;
     }
@@ -248,7 +254,7 @@ public class SPL {
                 }
                 for (int i =0;i<row;i++)
                 {
-                    System.out.printf("x%d=%d",i+1,hasil.getELMT(0, i));
+                    System.out.printf("x%d= %f\n",i+1,hasil.getELMT(0, i));
                 }
             }
             else
@@ -267,38 +273,44 @@ public class SPL {
     }
 
     public static void main(String[] args){
-        Matrix tesgaus = new Matrix();
-        tesgaus = IO.FileToMatrix("../test/test1.txt");
+        Matrix hilbert = new Matrix(10,11,0);
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                hilbert.setELMT(i, j, (1/((double)i+(double)j+1)));
+            }
+        }
+
+        for(int i = 0; i < 10; i++){
+            if(i == 0){
+                hilbert.setELMT(i, 10, 1);
+            }else{
+                hilbert.setELMT(i, 10, 0);
+            }
+        }
+
+        Matrix hilbert6 = new Matrix(6,7,0);
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                hilbert6.setELMT(i, j, (1/((double)i+(double)j+1)));
+            }
+        }
+
+        for(int i = 0; i < 6; i++){
+            if(i == 0){
+                hilbert6.setELMT(i, 6, 1);
+            }else{
+                hilbert6.setELMT(i, 6, 0);
+            }
+        }
+
+        hilbert.displayMatrix();
+
+
+        // baru.displayMatrix();
+        // Matrix tesgaus = new Matrix();
+        // tesgaus = IO.FileToMatrix("../test/test5.txt");
         Matrix hasil = new Matrix();
-        hasil = cramer(tesgaus);
+        hasil = cramer(hilbert,false);
         hasil.displayMatrix();
-
-        // Matrix test = new Matrix(4,5);
-        // test.setELMT(0,0,1);
-        // test.setELMT(0,1,1);
-        // test.setELMT(0,2,-1);
-        // test.setELMT(0,3,-1);
-        // test.setELMT(0,4,1);
-        // test.setELMT(1,0,2);
-        // test.setELMT(1,1,5);
-        // test.setELMT(1,2,-7);
-        // test.setELMT(1,3,-5);
-        // test.setELMT(1,4,-2);
-        // test.setELMT(2,0,2);
-        // test.setELMT(2,1,-1);
-        // test.setELMT(2,2,1);
-        // test.setELMT(2,3,3);
-        // test.setELMT(2,4,4);
-        // test.setELMT(3,0,5);
-        // test.setELMT(3,1,2);
-        // test.setELMT(3,2,-4);
-        // test.setELMT(3,3,2);
-        // test.setELMT(3,4,6);
-
-        // // displayMatrix(gaussJordan(m2))
-        // Matrix hasil = new Matrix();
-        // hasil = gaussJordan(test);
-        // hasil.displayMatrix();
-        // solve(hasil);
     }
 }
