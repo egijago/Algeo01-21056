@@ -17,7 +17,14 @@ public class IO {
     }
 
     public static Matrix append2(Matrix matrix1, Matrix matrix2){
-        Matrix temp = new Matrix(matrix1.getNumRow()+matrix2.getNumRow(),matrix1.getNumCol());
+        int n = 0;
+        if(matrix1.getNumCol() > matrix2.getNumCol()){
+            n = matrix1.getNumCol();
+        }else{
+            n = matrix2.getNumCol();
+        }
+        
+        Matrix temp = new Matrix(matrix1.getNumRow()+matrix2.getNumRow(),n);
         for(int i = 0; i < matrix1.getNumRow(); i++){
             for(int j = 0; j < matrix1.getNumCol(); j++){
                 temp.setELMT(i,j, matrix1.getELMT(i,j));
@@ -31,14 +38,14 @@ public class IO {
         return temp;
     }
 
-    public static void MatToTxt(Matrix matrix, String path){
+    public static void MatrixToFile(Matrix matrix, String path){
         String str = "";
         for(int row = 0; row < matrix.getNumRow(); row++){
             for(int col = 0; col < matrix.getNumCol(); col++){
                 if(col == matrix.getNumCol()-1){
                     str += String.format("%f\n", matrix.getELMT(row,col));
                 }else{
-                    str += String.format("%f", matrix.getELMT(row,col));
+                    str += String.format("%f ", matrix.getELMT(row,col));
                 }
             }
         }
@@ -53,13 +60,50 @@ public class IO {
         }
     }
 
-    public static Matrix StrToList(String str){
+    public static Matrix StringToList(String str){
         Matrix temp = new Matrix();
         String val = "";
         for(int i = 0; i < str.length(); i++){
             if(str.charAt(i) == ' ' || str.charAt(i) == '\n'){
-                
+                Matrix elm = new Matrix(1,1);
+                elm.setELMT(0,0, Double.valueOf(val));
+                temp = append(temp,elm);
+                val = "";
+            }else{
+                val += str.charAt(i);
+                if(i == str.length()-1){
+                    Matrix elmt = new Matrix(1,1);
+                    elmt.setELMT(0, 0, Double.valueOf(val));
+                    temp = append(temp,elmt);
+                    val = "";
+                }
             }
         }
+        return temp;
+    }
+
+    public static Matrix FileToMatrix(String path){
+        Matrix mat = new Matrix();
+        try{
+            File object = new File(path);
+            Scanner reader = new Scanner(object);
+            while(reader.hasNextLine()){
+                String data = reader.nextLine();
+                Matrix row = StringToList(data);
+                mat = append2(mat,row);
+            }
+            reader.close();
+        }catch (FileNotFoundException e){
+            System.out.println("File tidak ditemukan.");
+            e.printStackTrace();
+        }
+        return mat;
+    }
+
+    public static void main(String[] args){
+        Matrix test = new Matrix();
+        test = FileToMatrix("test.txt");
+        test.displayMatrix();
+        MatrixToFile(test, "../test/hai.txt");
     }
 }

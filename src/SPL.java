@@ -2,8 +2,6 @@ import java.text.Format;
 import java.util.List;
 public class SPL {
 
-    
-
     public static Matrix sortZero(Matrix matrix, int col,int r1){
         for (int i=r1;i<matrix.getNumRow()-1;i++){
             if (matrix.getELMT(i, col)==0 && matrix.getELMT(i+1, col)!=0){
@@ -112,7 +110,6 @@ public class SPL {
         return temp;
     }
 
-    
 
     static void solve(Matrix matrix){
         String var[] ={"s","t","u","v","w","x","y","z","a","b"};
@@ -279,6 +276,5 @@ public class SPL {
         hasil = gaussJordan(test);
         hasil.displayMatrix();
         solve(hasil);
-        
     }
 }
