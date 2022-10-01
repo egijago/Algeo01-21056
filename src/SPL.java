@@ -176,6 +176,7 @@ public class SPL {
             if (matrix.getELMT(rows, col_lead) == 0 && matrix.getELMT(rows, col_lead+1) != 0){
                 return ("SPL tidak memiliki solusi.");
             }
+        }
         
 
         // List of parameter
@@ -238,13 +239,13 @@ public class SPL {
                 else {
                     eq = String.format("X%d = ",col_lead+1) + eq + String.format("+ (%.2f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
-            } 
-             
             }
-        spl += (eq) + '\n'; 
+            spl += (eq) + '\n';   
         }
         return spl;
-    }
+        }
+        
+    
 //------------------------------------------------------
 //--------------------Cramer----------------------------
 //------------------------------------------------------
