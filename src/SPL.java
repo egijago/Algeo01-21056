@@ -218,7 +218,6 @@ public class SPL {
         }
         return result;
     }
-
     
     static Matrix inversspl (Matrix augmented) // agumented
     {   
@@ -255,48 +254,51 @@ public class SPL {
             else
             {
                 System.out.println("Matriks tidak mempunyai balikan");
-                System.out.println("SPL tidak memiliki solusi");
+                System.out.println("SPL tidak dapat dicari dengan metode balikan. silakan coba metode lain.");
             }
         }
         else
         {
             System.out.println("Matriks tidak berbetuk square");
-            System.out.println("tidak dapat menyelesaikan SPL dengan matriks balikan");
+            System.out.println("Tidak dapat menyelesaikan SPL dengan matriks balikan");
         }
         
         return hasil;
     }
 
     public static void main(String[] args){
-        
-        
-
-        Matrix test = new Matrix(4,5);
-        test.setELMT(0,0,1);
-        test.setELMT(0,1,1);
-        test.setELMT(0,2,-1);
-        test.setELMT(0,3,-1);
-        test.setELMT(0,4,1);
-        test.setELMT(1,0,2);
-        test.setELMT(1,1,5);
-        test.setELMT(1,2,-7);
-        test.setELMT(1,3,-5);
-        test.setELMT(1,4,-2);
-        test.setELMT(2,0,2);
-        test.setELMT(2,1,-1);
-        test.setELMT(2,2,1);
-        test.setELMT(2,3,3);
-        test.setELMT(2,4,4);
-        test.setELMT(3,0,5);
-        test.setELMT(3,1,2);
-        test.setELMT(3,2,-4);
-        test.setELMT(3,3,2);
-        test.setELMT(3,4,6);
-
-        // displayMatrix(gaussJordan(m2))
+        Matrix tesgaus = new Matrix();
+        tesgaus = IO.FileToMatrix("../test/test1.txt");
         Matrix hasil = new Matrix();
-        hasil = gaussJordan(test);
+        hasil = cramer(tesgaus);
         hasil.displayMatrix();
-        solve(hasil);
+
+        // Matrix test = new Matrix(4,5);
+        // test.setELMT(0,0,1);
+        // test.setELMT(0,1,1);
+        // test.setELMT(0,2,-1);
+        // test.setELMT(0,3,-1);
+        // test.setELMT(0,4,1);
+        // test.setELMT(1,0,2);
+        // test.setELMT(1,1,5);
+        // test.setELMT(1,2,-7);
+        // test.setELMT(1,3,-5);
+        // test.setELMT(1,4,-2);
+        // test.setELMT(2,0,2);
+        // test.setELMT(2,1,-1);
+        // test.setELMT(2,2,1);
+        // test.setELMT(2,3,3);
+        // test.setELMT(2,4,4);
+        // test.setELMT(3,0,5);
+        // test.setELMT(3,1,2);
+        // test.setELMT(3,2,-4);
+        // test.setELMT(3,3,2);
+        // test.setELMT(3,4,6);
+
+        // // displayMatrix(gaussJordan(m2))
+        // Matrix hasil = new Matrix();
+        // hasil = gaussJordan(test);
+        // hasil.displayMatrix();
+        // solve(hasil);
     }
 }
