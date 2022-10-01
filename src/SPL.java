@@ -1,5 +1,7 @@
 import java.text.Format;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 public class SPL {
 
     public static Matrix sortZero(Matrix matrix, int col,int r1){
@@ -275,9 +277,9 @@ public class SPL {
 //---------------------Input File---------------------------------------
 //-----------------------------------------------------------------------
     public static void fileInversspl(Matrix matrix, String path){
-        String str = "";
-        for(int col = 0; col < matrix.getNumCol(); col++){
-            str += String.format("X%d= %f\n", col+1, matrix.getELMT(0, col))
+        String str = "Hasil SPL:\n";
+        for(int col = 0; col < matrix.getNumCol()-1; col++){
+            str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
         }
         try{
             FileWriter writer = new FileWriter(path);
@@ -293,9 +295,10 @@ public class SPL {
 
 
         Matrix testing = new Matrix();
-        testing = IO.FileToMatrix("../test/test2.txt");
+        testing = IO.FileToMatrix("../test/test4.txt");
         Matrix hasil = new Matrix();
-        hasil = gauss(testing);
-        solve(hasil);
+        hasil = inversspl(testing);
+        fileInversspl(hasil, "../test/outputInvers.txt");
+        // solve(hasil);
     }
 }
