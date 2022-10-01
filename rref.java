@@ -213,7 +213,7 @@ public class rref{
             {0,0,0,0,0}
         };
         // displayMatrix(gaussJordan(m2));
-        displayMatrix(gaussJordan(m));
-        solve(m3);
+        displayMatrix(gauss(m2));
+        solve(gauss(m2));
     }
 }
