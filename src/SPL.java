@@ -249,6 +249,10 @@ public class SPL {
                         hasil.setELMT(i, 0, hasil.getELMT(i, 0)+invers.getELMT(i, j)*b.getELMT(j, 0));
                     }
                 }
+                for (int i =0;i<sqr;i++)
+                {
+                    System.out.printf("x%d=%d",i+1,hasil.getELMT(i, 0));
+                }
             }
             else
             {
