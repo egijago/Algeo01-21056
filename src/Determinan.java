@@ -66,7 +66,7 @@ public class Determinan {
 
         prod = prod * (Math.pow(-1,p));
         BigDecimal bd = new BigDecimal(Double.toString(prod));
-        bd = bd.setScale(20, RoundingMode.HALF_UP);
+        bd = bd.setScale(100, RoundingMode.HALF_UP);
 
         return bd.doubleValue();
     }
