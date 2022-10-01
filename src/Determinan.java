@@ -1,5 +1,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Determinan {
 
@@ -87,6 +89,30 @@ public class Determinan {
             sign *= -1;
         }
         return det;
+    }
+
+    public static void fileDeterminan(double det, String path){
+        String str = String.format("Hasil determinan matrix adalah %f",det);
+        try{
+            FileWriter writer = new FileWriter(path);
+            writer.write(str);
+            writer.close();
+            System.out.println("Berhasil menulis hasil ke dalam file.");
+        } catch (IOException e){
+            System.out.println("Gagal menulis hasil ke file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Matrix matrix = IO.FileToMatrix("../test/test9.txt");
+        double hasil = detCofactor(matrix);
+        double hasil1 = detRowRed(matrix);
+        System.out.println(hasil);
+        System.out.println(hasil1);
+
+        fileDeterminan(hasil1, "../test/hasildeterminan.txt");
+        fileDeterminan(hasil, "../test/hasildeterminan2.txt");
     }
 
 }

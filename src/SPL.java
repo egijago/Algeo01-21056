@@ -259,58 +259,26 @@ public class SPL {
             }
             else
             {
-                System.out.println("Matriks tidak mempunyai balikan");
+                System.out.println("Matriks tidak mempunyai balikan.");
                 System.out.println("SPL tidak dapat dicari dengan metode balikan. silakan coba metode lain.");
             }
         }
         else
         {
-            System.out.println("Matriks tidak berbetuk square");
-            System.out.println("Tidak dapat menyelesaikan SPL dengan matriks balikan");
+            System.out.println("Matriks tidak berbentuk square.");
+            System.out.println("Tidak dapat menyelesaikan SPL dengan matriks balikan.");
         }
         
         return hasil;
     }
 
     public static void main(String[] args){
-        Matrix hilbert = new Matrix(10,11,0);
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; j++){
-                hilbert.setELMT(i, j, (1/((double)i+(double)j+1)));
-            }
-        }
-
-        for(int i = 0; i < 10; i++){
-            if(i == 0){
-                hilbert.setELMT(i, 10, 1);
-            }else{
-                hilbert.setELMT(i, 10, 0);
-            }
-        }
-
-        Matrix hilbert6 = new Matrix(6,7,0);
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 6; j++){
-                hilbert6.setELMT(i, j, (1/((double)i+(double)j+1)));
-            }
-        }
-
-        for(int i = 0; i < 6; i++){
-            if(i == 0){
-                hilbert6.setELMT(i, 6, 1);
-            }else{
-                hilbert6.setELMT(i, 6, 0);
-            }
-        }
-
-        hilbert.displayMatrix();
 
 
-        // baru.displayMatrix();
-        // Matrix tesgaus = new Matrix();
-        // tesgaus = IO.FileToMatrix("../test/test5.txt");
+        Matrix testing = new Matrix();
+        testing = IO.FileToMatrix("../test/test2.txt");
         Matrix hasil = new Matrix();
-        hasil = cramer(hilbert,false);
-        hasil.displayMatrix();
+        hasil = gauss(testing);
+        solve(hasil);
     }
 }

@@ -23,7 +23,7 @@ public class IO {
         }else{
             n = matrix2.getNumCol();
         }
-        
+
         Matrix temp = new Matrix(matrix1.getNumRow()+matrix2.getNumRow(),n);
         for(int i = 0; i < matrix1.getNumRow(); i++){
             for(int j = 0; j < matrix1.getNumCol(); j++){
@@ -100,10 +100,29 @@ public class IO {
         return mat;
     }
 
+    public static Matrix inputTerminalToMatrix(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Masukkan jumlah baris matrix: ");
+        int baris = sc.nextInt();
+        System.out.print("Masukkan jumlah kolom matrix: ");
+        int kolom = sc.nextInt();
+
+        Matrix output = new Matrix(baris,kolom);
+
+        for(int i = 0; i < baris; i++){
+            for(int j = 0; j < kolom; j++){
+                System.out.printf("Masukkan elemen [%d][%d]: ",i,j);
+                double elmt = sc.nextDouble();
+                output.setELMT(i,j,elmt);
+            }
+        }
+        sc.close();
+        return output;
+    }
+
     public static void main(String[] args){
         Matrix test = new Matrix();
-        test = FileToMatrix("test.txt");
+        test = inputTerminalToMatrix();
         test.displayMatrix();
-        MatrixToFile(test, "../test/hai.txt");
     }
 }
