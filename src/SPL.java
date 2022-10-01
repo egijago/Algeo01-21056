@@ -228,30 +228,28 @@ public class SPL {
         Matrix b = new Matrix(1,row);
 
         Matrix.splitAugmentedMatrix(augmented, A, b);
-
-        int sqr = A.getNumRow();
-        Matrix invers = new Matrix(sqr, sqr);
-        Matrix hasil= new Matrix(sqr, 1);
+        Matrix invers = new Matrix(row, row);
+        Matrix hasil= new Matrix(1, col);
         if(A.isSquare())
         {
             if(Determinan.detRowRed(A)!=0)
             {
                 
                 invers = Inverse.inverseGJ(A);
-                for (int k = 0;k<sqr;k++)
+                for (int k = 0;k<row;k++)
                 {
-                    hasil.setELMT(sqr, k, 0);
+                    hasil.setELMT(0, k, 0);
                 }
-                for (int i=0;i<sqr;i++)
+                for (int i=0;i<row;i++)
                 {
-                    for(int j=0;j<sqr;j++)
+                    for(int j=0;j<col-1;j++)
                     {
-                        hasil.setELMT(i, 0, hasil.getELMT(i, 0)+invers.getELMT(i, j)*b.getELMT(j, 0));
+                        hasil.setELMT(0, i, hasil.getELMT(0, i)+invers.getELMT(i, j)*b.getELMT(0,j));
                     }
                 }
-                for (int i =0;i<sqr;i++)
+                for (int i =0;i<row;i++)
                 {
-                    System.out.printf("x%d=%d",i+1,hasil.getELMT(i, 0));
+                    System.out.printf("x%d=%d",i+1,hasil.getELMT(0, i));
                 }
             }
             else
