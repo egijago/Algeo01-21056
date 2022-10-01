@@ -41,13 +41,6 @@ public class Bicubic {
         bond = cutCol(bond,matrix.getNumRow(),(matrix.getNumRow()*2)-1);
         return bond;
     }
-    static float power(float val, int n){
-        float res = 1;
-        for (int i =0;i<=n;i++){
-            res *= val;
-        }
-        return res;
-    }
     static Matrix multiply(Matrix m1,Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(), m2.getNumCol());
         for (int i=0;i<m1.getNumRow();i++){
@@ -60,7 +53,11 @@ public class Bicubic {
         }
         return temp;
     }
+<<<<<<< HEAD
     static double bicubicInterpolation(Matrix matrix,float a,float b){
+=======
+    static void bicubicInterpolation(Matrix matrix,double a,double b){
+>>>>>>> 1e64ef251bb93ad819c7f66b620a02557a163e7e
         // akan dicari melalui ekspresi f(x,y) = X.A;
         // arrange matrix X;
         Matrix X = new Matrix(16, 16);
@@ -70,8 +67,7 @@ public class Bicubic {
             for (int col =0;col<16;col++){
                 int i = (col%4)-1;
                 int j = (col/4)-1;
-                X.setELMT(row, col, power(x, i)*power(y, j));
-                // X[i][j] = power()*
+                X.setELMT(row, col, Math.pow(x, i)*Math.pow(y, j));
             }
         }
         // X inverse
@@ -91,11 +87,16 @@ public class Bicubic {
         for (int k=0;k<15;k++){
             int i = k%4;
             int j = k/4;
-            res += A.getELMT(k, 0)*power(a,i)*power(b,j);
+            res += A.getELMT(k, 0)*Math.pow(a,i)*Math.pow(b,j);
         }
         System.out.println(res);
+<<<<<<< HEAD
         return res;
 
     }
 
+=======
+    
+    }
+>>>>>>> 1e64ef251bb93ad819c7f66b620a02557a163e7e
 }
