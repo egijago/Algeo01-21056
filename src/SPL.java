@@ -227,7 +227,7 @@ public class SPL {
         return result;
     }
     
-    static Matrix inversspl (Matrix augmented) // agumented
+    static Matrix inversspl (Matrix augmented) 
     {   
         int row = augmented.getNumRow();
         int col = augmented.getNumCol();
@@ -236,7 +236,7 @@ public class SPL {
 
         Matrix.splitAugmentedMatrix(augmented, A, b);
         Matrix invers = new Matrix(row, row);
-        Matrix hasil= new Matrix(1, col);
+        Matrix hasil= new Matrix(1, col-1);
         if(A.isSquare())
         {
             if(Determinan.detRowRed(A)!=0)
@@ -273,12 +273,30 @@ public class SPL {
         
         return hasil;
     }
+
+
 //-----------------------------------------------------------------------
-//---------------------Input File---------------------------------------
+//---------------------Output File---------------------------------------
 //-----------------------------------------------------------------------
     public static void fileInversspl(Matrix matrix, String path){
         String str = "Hasil SPL:\n";
-        for(int col = 0; col < matrix.getNumCol()-1; col++){
+        for(int col = 0; col < matrix.getNumCol(); col++){
+            str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
+        }
+        try{
+            FileWriter writer = new FileWriter(path);
+            writer.write(str);
+            writer.close();
+            System.out.println("Berhasil menulis matrix ke dalam file.");
+        } catch (IOException e){
+            System.out.println("Gagal menulis matrix ke file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void fileCramer(Matrix matrix, String path){
+        String str = "Hasil SPL:\n";
+        for(int col = 0; col < matrix.getNumCol(); col++){
             str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
         }
         try{
@@ -298,7 +316,7 @@ public class SPL {
         testing = IO.FileToMatrix("../test/test4.txt");
         Matrix hasil = new Matrix();
         hasil = inversspl(testing);
-        fileInversspl(hasil, "../test/outputInvers.txt");
+        fileInversspl(hasil,"../test/cramsku.txt");
         // solve(hasil);
     }
 }
