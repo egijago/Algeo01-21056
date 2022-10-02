@@ -556,7 +556,7 @@ public class Menu {
 
                 // ######## start here egi ##########
             }
-
+            
             System.out.println();
             System.out.println("Apakah anda ingin melanjutkan menggunakan calculator Matrix?");
             System.out.print("( 0 : tidak || 1 : iya) : ");

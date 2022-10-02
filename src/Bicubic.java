@@ -101,5 +101,6 @@ public class Bicubic  {
         System.out.println(bicubicInterpolation(coba, 5, 2));
         coba = SPL.rref(coba);
         coba.displayMatrix();
+
     }
 }
