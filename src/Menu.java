@@ -551,10 +551,30 @@ public class Menu {
                 System.out.println("Penyelesaian masalah Regresi Linier Berganda");
                 System.out.println();
 
-                System.out.println("Pilih cara masukan m");
-                System.out.println("1. ");
+                try{
+                    Menu.m = askInput();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
 
-                // ######## start here egi ##########
+                String solution = RLB.regression(m);
+                System.out.print("Apakah anda ingin menyimpan output ke file? (0 : tidak | 1 : iya) : ");
+                int jawab = 0;
+                try{
+                    jawab = Integer.parseInt(bufferedReader.readLine());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+                if(jawab == 1){
+                    System.out.print("Masukkan path dari file tempat anda ingin menyimpan output: ");
+                    try{
+                        Menu.pathOut = bufferedReader.readLine();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                    IO.StringToFile(solution, Menu.pathOut);
+                }
             }
             
             System.out.println();
