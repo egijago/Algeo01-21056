@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileWriter;   
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.*;
 
 public class IO {
     public static Matrix append(Matrix list1, Matrix list2){
@@ -53,9 +55,9 @@ public class IO {
             FileWriter writer = new FileWriter(path);
             writer.write(str);
             writer.close();
-            System.out.println("Berhasil menulis matrix ke dalam file.");
+            System.out.println("Berhasil menulis matriks ke dalam file.");
         } catch (IOException e){
-            System.out.println("Gagal menulis matrix ke file.");
+            System.out.println("Gagal menulis matriks ke file.");
             e.printStackTrace();
         }
     }
@@ -101,28 +103,106 @@ public class IO {
     }
 
     public static Matrix inputTerminalToMatrix(){
-        Scanner sc = new Scanner(System.in);
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         System.out.print("Masukkan jumlah baris matrix: ");
-        int baris = sc.nextInt();
+        int baris = 0, kolom = 0;
+        try{
+            baris = Integer.parseInt(bufferedReader.readLine());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         System.out.print("Masukkan jumlah kolom matrix: ");
-        int kolom = sc.nextInt();
+        try{
+            kolom = Integer.parseInt(bufferedReader.readLine());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
         Matrix output = new Matrix(baris,kolom);
 
         for(int i = 0; i < baris; i++){
             for(int j = 0; j < kolom; j++){
                 System.out.printf("Masukkan elemen [%d][%d]: ",i,j);
-                double elmt = sc.nextDouble();
+                double elmt = 0;
+                try{
+                    elmt = Double.parseDouble(bufferedReader.readLine());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
                 output.setELMT(i,j,elmt);
             }
         }
-        sc.close();
         return output;
     }
 
+    public static Matrix inputTerminalToMatrixSqrt(){
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        System.out.print("Masukkan jumlah baris & kolom matrix: ");
+        int n = 0;
+        try{
+            n = Integer.parseInt(bufferedReader.readLine());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        Matrix output = new Matrix(n,n);
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                System.out.printf("Masukkan elemen [%d][%d]: ",i,j);
+                double elmt = 0;
+                try{
+                    elmt = Double.parseDouble(bufferedReader.readLine());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                output.setELMT(i,j,elmt);
+            }
+        }
+        return output;
+    }
+
+    public static void StringToFile(String str, String path){
+        try{
+            FileWriter writer = new FileWriter(path);
+            writer.write(str);
+            writer.close();
+            System.out.println("Berhasil menulis hasil ke dalam file.");
+        } catch (IOException e){
+            System.out.println("Gagal menulis hasil ke file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static Matrix TitikInterpolasiToMatrix(Matrix matrix){
+        Matrix hasil = new Matrix();
+        int row = matrix.getNumRow();
+        int col = matrix.getNumCol();
+        Matrix titik = new Matrix(row-1,col);
+        
+        for(int i = 0; i < matrix.getNumRow()-1; i++){
+            for(int j = 0; j < matrix.getNumCol(); j++){
+                titik.setELMT(i, j, matrix.getELMT(i, j));
+            }
+        }
+
+        hasil = Matrix.copyMatrix(titik);
+        return hasil;
+    }
+
+    public static double TitikInterpolasiToAbsis(Matrix matrix){
+        double x = 0;
+        int row = matrix.getNumRow();
+        x = matrix.getELMT(row-1,0);
+        return x;
+    }
+
+    // public static void inputInterpolasi(Matrix matrix, double absis){
+
+    // }
+
     public static void main(String[] args){
-        Matrix test = new Matrix();
-        test = inputTerminalToMatrix();
-        test.displayMatrix();
     }
 }

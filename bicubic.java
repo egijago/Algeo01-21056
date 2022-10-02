@@ -37,7 +37,7 @@ public class bicubic extends rref {
     static float[][] inverseGJ(float[][] matrix) {
         float [][] bond = bindHorizontal(matrix,identity(matrix.length));
         // bond = gaussJordan(bond);
-        bond = gaussJordan(bond);
+        System.out.println(bond);
         bond = cutCol(bond,matrix.length,(matrix.length*2)-1);
         return bond;
     }
@@ -100,12 +100,20 @@ public class bicubic extends rref {
 
     public static void main(String[] args){
         float [][] mat ={
-            {1,2,3,4},
-            {1,2,3,2},
-            {2,3,4,2},
-            {2,3,1,4}
+            {153,59,210,96},
+            {125,161,72,81},
+            {98,101,42,12},
+            {21,51,0,16}
         };
-        float a = 0.6;
-        bicubicInterpolation(mat,0.6,0.6);
+        float a = 5;
+        float b = 2;
+        mat = gaussJordan(mat);
+        for(int i = 0; i < mat.length; i++){
+            for(int j = 0; j < mat.length; j++){
+                System.out.print(mat[i][j]);
+                System.out.print(" ");
+            }System.out.println();
+        }
+        bicubicInterpolation(mat,a,b);
     }
 }

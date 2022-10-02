@@ -1,5 +1,5 @@
 public class RLB {
-    public static void regression(Matrix matrix){
+    public static String regression(Matrix matrix){
         int row = matrix.getNumRow();
         int col = matrix.getNumCol();
 
@@ -29,15 +29,14 @@ public class RLB {
                 }
                 else{
                     if(eq == ""){
-                        eq += String.format("(%f)X%d", b.getELMT(i,0),i);
+                        eq += String.format("(%f)x%d", b.getELMT(i,0),i);
                     }else{
-                        eq += String.format(" + (%f)X%d", b.getELMT(i,0),i);
+                        eq += String.format(" + (%f)x%d", b.getELMT(i,0),i);
                     }
                 }
             }
         }
         System.out.println(eq);
+        return eq;
     }
-
-    
 }

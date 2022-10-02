@@ -1,4 +1,4 @@
-public class Bicubic {
+public class Bicubic  {
     public static Matrix bindHorizontal(Matrix m1, Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(),m1.getNumCol()+m2.getNumCol());
         for (int i = 0;i<m1.getNumRow();i++){
@@ -21,6 +21,7 @@ public class Bicubic {
         }
         return temp;
     }
+
     public static Matrix identity(int n){
         Matrix temp = new Matrix(n, n);
         for (int i =0;i<n;i++){
@@ -34,24 +35,26 @@ public class Bicubic {
         }
         return temp;
     }
-    // static Matrix inverseGJ(Matrix matrix) {
-    //     Matrix bond = bindHorizontal(matrix,identity(matrix.getNumRow()));
-    //     // bond = gaussJordan(bond);
-    //     bond = SPL.gaussJordan(bond);
-    //     bond = cutCol(bond,matrix.getNumRow(),(matrix.getNumRow()*2)-1);
-    //     return bond;
-    // }
+
     static Matrix multiply(Matrix m1,Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(), m2.getNumCol());
         for (int i=0;i<m1.getNumRow();i++){
             for (int j =0;j<m2.getNumCol();j++){
                 temp.setELMT(i, j, 0);
                 for (int k = 0;k<m2.getNumRow();k++){
-                    temp.setELMT(i, j, temp.getELMT(i, j)+m1.getELMT(i, k)*m2.getELMT(k, j));
+                    temp.setELMT(i, j, temp.getELMT(i, j)+(m1.getELMT(i, k)*m2.getELMT(k, j)));
                 }
             }
         }
         return temp;
+    }
+
+    static Matrix inverseGJLS(Matrix matrix){
+        Matrix bond = bindHorizontal(matrix, identity(matrix.getNumRow()));
+
+        bond = SPL.rref(bond);
+        bond = cutCol(bond, matrix.getNumRow(), (matrix.getNumRow()*2)-1);
+        return bond;
     }
     static String bicubicInterpolation(Matrix matrix,double a,double b){
         // akan dicari melalui ekspresi f(x,y) = X.A;
@@ -63,11 +66,11 @@ public class Bicubic {
             for (int col =0;col<16;col++){
                 int i = (col%4)-1;
                 int j = (col/4)-1;
-                X.setELMT(row, col, Math.pow(x, i)*Math.pow(y, j));
+                X.setELMT(row, col, Math.pow((double)x, (double)i) * Math.pow((double)y, (double)j));
             }
         }
         // X inverse
-        Matrix Xinv = Inverse.inverseGJ(X);
+        Matrix Xinv = inverseGJLS(X);
 
         // matrix f(x,y)
         Matrix f = new Matrix(16, 1);
@@ -83,11 +86,20 @@ public class Bicubic {
         for (int k=0;k<15;k++){
             int i = k%4;
             int j = k/4;
-            res += A.getELMT(k, 0)*Math.pow(a,i)*Math.pow(b,j);
+            res += A.getELMT(k, 0)*Math.pow(a,(double)i)*Math.pow(b,(double)j);
         }
-        System.out.println(res);
-        String hasil = String.format("%f",res);
-
+        String hasil = String.format("Hasil interpolasi bicubic f(%f,%f) adalah %f",a,b,res);
+        // System.out.println(hasil);
+        System.out.println(hasil);
         return hasil; 
+    }
+
+    public static void main(String[] args) {
+        Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
+        System.out.println(0.0/0);
+        System.out.println(Math.pow(1,2));
+        System.out.println(bicubicInterpolation(coba, 5, 2));
+        coba = SPL.rref(coba);
+        coba.displayMatrix();
     }
 }

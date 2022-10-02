@@ -1,6 +1,4 @@
 
-import java.io.FileWriter;
-import java.io.IOException;
 public class SPL {
 
     public static Matrix sortZero(Matrix matrix, int col,int r1){
@@ -163,7 +161,7 @@ public class SPL {
         //  Mengembalikan solusi SPL dari matrix yang telah dalam formasi eselon tereduksi
         // Mengembalikan "SPL tidak memiliki solusi." jika SPL tidak ada solusi.
         int col_lead = 0;
-        String spl = "";
+        String spl = "Hasil SPL:\n";
         for (int rows = 0 ;rows<matrix.getNumRow();rows++){
             col_lead = 0;
             while (matrix.getELMT(rows, col_lead)==0){
@@ -209,7 +207,7 @@ public class SPL {
                 }
                 else if (searchInCol(parameter,0,col+1) == -1){
                     // Variable belum di assign ke parameter
-                    spl += String.format("X%d = %s\n",col+1,var[idx]) +'\n';
+                    spl += String.format("x%d = %s\n",col+1,var[idx]) +'\n';
                     String[][] lst = {{String.format("%d",col+1),var[idx]}};
                     parameter = append(parameter,lst);
                     idx +=1;
@@ -217,27 +215,27 @@ public class SPL {
                 // Variable sudah di assing ke parameter
                 if (eq==""){
                     double coef = -1 * matrix.getELMT(row, col);
-                    eq += String.format("(%.2f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
+                    eq += String.format("(%.3f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
                 else {
                     double coef = -1 * matrix.getELMT(row, col);
-                    eq += String.format("+ (%.2f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
+                    eq += String.format("+ (%.3f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
             }
             if (eq==""){
                 if (matrix.getELMT(row, col_lead)==0){
-                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%.2f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 else{
-                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("(%.2f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("(%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 }
             else {
                 if (matrix.getELMT(row, matrix.getNumCol()-1) == 0){
-                    eq = String.format("X%d = ",col_lead+1) + eq;
+                    eq = String.format("x%d = ",col_lead+1) + eq;
                 }
                 else {
-                    eq = String.format("X%d = ",col_lead+1) + eq + String.format("+ (%.2f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("+ (%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
             }
             spl += (eq) + '\n';   
@@ -364,20 +362,6 @@ public class SPL {
         return str;
     }
 
-    public static void StringToFile(String str, String path){
-        try{
-            FileWriter writer = new FileWriter(path);
-            writer.write(str);
-            writer.close();
-            System.out.println("Berhasil menulis matrix ke dalam file.");
-        } catch (IOException e){
-            System.out.println("Gagal menulis matrix ke file.");
-            e.printStackTrace();
-        }
-    }
     public static void main(String[] args){
-        Matrix testing = new Matrix();
-        testing = IO.FileToMatrix("../test/test4.txt");
-        System.out.println(gaussJordan(testing));
     }
 }

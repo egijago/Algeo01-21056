@@ -35,7 +35,6 @@ public class Interpolasi {
             }
         }
         System.out.println(fx);
-        System.out.printf("Taksiran untuk f(%f) ialah: %f\n",absis, res);
         return res;
     }
 
