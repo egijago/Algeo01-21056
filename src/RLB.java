@@ -3,8 +3,8 @@ public class RLB {
         int row = matrix.getNumRow();
         int col = matrix.getNumCol();
 
-        Matrix x = new Matrix(row,1);
-        Matrix y = new Matrix(row, col);
+        Matrix y = new Matrix(row,1);
+        Matrix x = new Matrix(row, col);
 
         for(int i = 0; i < row; i++){
             y.setELMT(i, 0, matrix.getELMT(i, col-1));

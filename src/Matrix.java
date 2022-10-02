@@ -114,9 +114,9 @@ public class Matrix {
     }
 
     public static Matrix transpose(Matrix matrix){
-        Matrix hasil = new Matrix(matrix.getNumRow(), matrix.getNumCol());
-        for(int i = 0; i < matrix.getNumRow(); i++){
-            for(int j = 0; j < matrix.getNumCol(); j++){
+        Matrix hasil = new Matrix(matrix.getNumCol(), matrix.getNumRow());
+        for(int i = 0; i < matrix.getNumCol(); i++){
+            for(int j = 0; j < matrix.getNumRow(); j++){
                 hasil.setELMT(i,j, matrix.getELMT(j,i));
             }
         }

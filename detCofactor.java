@@ -159,15 +159,15 @@ public class detCofactor{
       
     public static void main(String[] args){
         float[][] m = {
-            {1,2},
-            {2,3},
-            {3,4},
-            {5,6},
-            {7,8}
+            {1,2,3},
+            {2,3,4},
+            {3,4,5},
+            {5,6,7},
+            {7,8,9}
         };
         // System.out.println(determinant(m));
         // displayMatrix(inverse(m));
         // interpolation(m);
-        interpolation(m);
+        regression(m);
     }
 }
