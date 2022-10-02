@@ -71,7 +71,7 @@ public class Bicubic  {
         }
         // X inverse
         Matrix Xinv = inverseGJLS(X);
-
+        Xinv.displayMatrix();
         // matrix f(x,y)
         Matrix f = new Matrix(16, 1);
         for (int i =0;i<16;i++){
@@ -95,6 +95,13 @@ public class Bicubic  {
     }
 
     public static void main(String[] args) {
+        Matrix m;
+        // m.matrix = {
+        //     {153,59,210,96},
+        //     {125,161,72,81},
+        //     {98,101,42,12},
+        //     {21,51,0,16}
+        // };
         Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
         System.out.println(0.0/0);
         System.out.println(Math.pow(1,2));
