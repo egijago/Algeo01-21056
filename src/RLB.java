@@ -18,7 +18,7 @@ public class RLB {
         Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(Inverse.inverseCofactor(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
 
         b.displayMatrix();
-        String eq = "y =";
+        String eq = "y = ";
         for(int i = 0; i < b.getNumRow(); i++){
             if(b.getELMT(i,0) == 0){
                 continue;
