@@ -56,6 +56,15 @@ public class Bicubic  {
         bond = cutCol(bond, matrix.getNumRow(), (matrix.getNumRow()*2)-1);
         return bond;
     }
+
+    static double power(double val, int n){
+        double res = 1;
+        for (int i =0;i<=n;i++){
+            res *= val;
+        }
+        return res;
+    }
+
     static String bicubicInterpolation(Matrix matrix,double a,double b){
         // akan dicari melalui ekspresi f(x,y) = X.A;
         // arrange matrix X;
@@ -66,12 +75,12 @@ public class Bicubic  {
             for (int col =0;col<16;col++){
                 int i = (col%4)-1;
                 int j = (col/4)-1;
-                X.setELMT(row, col, Math.pow((double)x, (double)i) * Math.pow((double)y, (double)j));
+                X.setELMT(row, col, power(x,i) * power(y,j));
             }
         }
+        X.displayMatrix();
         // X inverse
         Matrix Xinv = inverseGJLS(X);
-        Xinv.displayMatrix();
         // matrix f(x,y)
         Matrix f = new Matrix(16, 1);
         for (int i =0;i<16;i++){
@@ -86,7 +95,8 @@ public class Bicubic  {
         for (int k=0;k<15;k++){
             int i = k%4;
             int j = k/4;
-            res += A.getELMT(k, 0)*Math.pow(a,(double)i)*Math.pow(b,(double)j);
+            res += A.getELMT(k, 0) * power(a,i) * power(b,j);
+            // res += A.getELMT(k, 0)*Math.pow(a,(double)i)*Math.pow(b,(double)j);
         }
         String hasil = String.format("Hasil interpolasi bicubic f(%f,%f) adalah %f",a,b,res);
         // System.out.println(hasil);
@@ -95,19 +105,8 @@ public class Bicubic  {
     }
 
     public static void main(String[] args) {
-        Matrix m;
-        // m.matrix = {
-        //     {153,59,210,96},
-        //     {125,161,72,81},
-        //     {98,101,42,12},
-        //     {21,51,0,16}
-        // };
         Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
-        System.out.println(0.0/0);
-        System.out.println(Math.pow(1,2));
-        System.out.println(bicubicInterpolation(coba, 5, 2));
-        coba = SPL.rref(coba);
-        coba.displayMatrix();
+        System.out.println(bicubicInterpolation(coba, 1, 1));
 
     }
 }
