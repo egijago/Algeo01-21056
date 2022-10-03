@@ -104,15 +104,4 @@ public class Determinan {
         }
     }
 
-    public static void main(String[] args) {
-        Matrix matrix = IO.FileToMatrix("../test/test9.txt");
-        double hasil = detCofactor(matrix);
-        double hasil1 = detRowRed(matrix);
-        System.out.println(hasil);
-        System.out.println(hasil1);
-
-        fileDeterminan(hasil1, "../test/hasildeterminan.txt");
-        fileDeterminan(hasil, "../test/hasildeterminan2.txt");
-    }
-
 }

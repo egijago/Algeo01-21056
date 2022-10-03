@@ -361,7 +361,4 @@ public class SPL {
         }
         return str;
     }
-
-    public static void main(String[] args){
-    }
 }

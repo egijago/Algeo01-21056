@@ -724,8 +724,8 @@ public class Menu {
                 action = 7;
             }
         }
-        
     }
+    
     public static void main(String[] args) {
         mainMenu();
     }
