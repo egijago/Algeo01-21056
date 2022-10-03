@@ -206,7 +206,11 @@ public class SPL {
                 }
                 else if (searchInCol(parameter,0,col+1) == -1){
                     // Variable belum di assign ke parameter
+<<<<<<< HEAD
                     spl += String.format("x%d = %s\n",col+1,var[idx]);
+=======
+                    spl += String.format("x%d = %s",col+1,var[idx]) +'\n';
+>>>>>>> 9cae2d28507817b59b24c45a53db6c8096ca141e
                     String[][] lst = {{String.format("%d",col+1),var[idx]}};
                     parameter = append(parameter,lst);
                     idx +=1;

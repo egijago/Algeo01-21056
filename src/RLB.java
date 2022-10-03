@@ -28,7 +28,7 @@ public class RLB {
                     eq += String.format("%f",b.getELMT(0, 0));
                 }
                 else{
-                    res += input.getELMT(i-1,0)*b.getELMT(i, 0);
+                    res += input.getELMT(0,i-1)*b.getELMT(i, 0);
                     if(eq == ""){
                         eq += String.format("(%f)x%d", b.getELMT(i,0),i);
                     }else{
