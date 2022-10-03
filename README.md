@@ -22,7 +22,7 @@
 ├── doc
 │   └── Algeo01-21056.pdf
 ├── lib
-│   └── Algeo01-21056.jar
+│   └── MatrixCalculator.jar
 ├── src
 │   ├── Bicubic.java
 │   ├── Determinan.java
