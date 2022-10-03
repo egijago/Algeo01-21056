@@ -23,7 +23,6 @@ public class Menu {
         System.out.println();
     }
 
-
     public static Matrix askInput() throws IOException{
         System.out.println("Pilih cara masukkan matrix: ");
         System.out.println("1. Input melalui terminal");
@@ -416,7 +415,7 @@ public class Menu {
                 double x = IO.TitikInterpolasiToAbsis(hasil);
 
                 double fx = Interpolasi.Interpolation(titik, x);
-                System.out.printf("Taksiran untuk f(%.4f) ialah: %.4f\n",x, fx);
+                System.out.printf("Taksiran untuk f(%f) ialah: %f\n",x, fx);
 
 
                 System.out.println();
@@ -552,119 +551,13 @@ public class Menu {
                 System.out.println("Penyelesaian masalah Regresi Linier Berganda");
                 System.out.println();
 
-                System.out.println("Pilih cara masukkan matrix: ");
-                System.out.println("1. Input melalui terminal");
-                System.out.println("2. Menggunakan file txt");
-                System.out.println();
-
-                System.out.print("Pilih metode input matrix: ");
-                int actionInputMatrixInt = 0;
                 try{
-                    actionInputMatrixInt = Integer.parseInt(bufferedReader.readLine());
-                }catch(IOException e){
+                    Menu.m = askInput();
+                }catch (IOException e){
                     e.printStackTrace();
                 }
 
-                while(actionInputMatrixInt < 1 || actionInputMatrixInt > 2){
-                    System.out.println("Tolong masukkan input yang benar!");
-                    System.out.print("Pilih Metode: ");
-                    try{
-                        actionInputMatrixInt = Integer.parseInt(bufferedReader.readLine());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    System.out.println();
-                }
-
-                Matrix cari = new Matrix();
-                Matrix titik = new Matrix();
-                if(actionInputMatrixInt == 1){
-                    System.out.println("Masukkan jumlah peubah (n): ");
-                    int n = 0;
-                    try{
-                        n = Integer.parseInt(bufferedReader.readLine());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    System.out.println("Masukkan jumlah sampel (m): ");
-                    int m = 0;
-                    try{
-                        m = Integer.parseInt(bufferedReader.readLine());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    Matrix matrix = new Matrix(m,n+1);
-                    System.out.println("Masukkan nilai-nilai berikut: ");
-                    for(int i = 0; i < m; i++){
-                        for(int j = 0; j < n+1; j++){
-                            if(j == n){
-                                System.out.printf("Masukkan nilai y sampel-%d: ",i+1);
-                                double y = 0;
-                                try{
-                                    y = Double.parseDouble(bufferedReader.readLine());
-                                }catch(IOException e){
-                                    e.printStackTrace();
-                                }
-                                matrix.setELMT(i, j, y);
-                            }else{
-                                System.out.printf("Masukkan nilai x%d sampel-%d: ", j+1, i+1);
-                                double x = 0;
-                                try{
-                                    x = Double.parseDouble(bufferedReader.readLine());
-                                }catch(IOException e){
-                                    e.printStackTrace();
-                                }
-                                matrix.setELMT(i, j, x);
-                            }
-                        }
-                    }
-                    cari = Matrix.copyMatrix(matrix);
-                    Matrix taksir = new Matrix(1,n);
-                    System.out.println("Masukkan nilai yang ingin ditaksir");
-                    
-                    for(int i = 0; i < n; i++){
-                        double z =0;
-                        System.out.printf("x%d: ",i+1);
-                        try{
-                            z = Double.parseDouble(bufferedReader.readLine());
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }
-                        taksir.setELMT(0, i, z);
-                    }
-                    titik = Matrix.copyMatrix(taksir);
-                    
-
-                }else{
-                    System.out.print("Masukkan path dari file yang berisi matrix: ");
-                    try{
-                        Menu.pathIn = bufferedReader.readLine();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                    Matrix temp = IO.FileToMatrix(pathIn);
-
-                    int n = temp.getNumCol()-1;
-                    int m = temp.getNumRow()-1;
-                    
-                    Matrix matrix = new Matrix(m,n+1);
-                    Matrix taksir = new Matrix(1,n);
-
-                    for(int i = 0; i < m; i++){
-                        for(int j = 0; j < n+1; j++){
-                            matrix.setELMT(i, j, temp.getELMT(i, j));
-                        }
-                    }
-
-                    for(int i = 0; i < n; i++){
-                        taksir.setELMT(0, i, temp.getELMT(m, i));
-                    }
-
-                    cari = Matrix.copyMatrix(matrix);
-                    titik = Matrix.copyMatrix(taksir);
-                }
-
-                String solution = RLB.regression(cari,titik);
+                String solution = RLB.regression(m);
                 System.out.print("Apakah anda ingin menyimpan output ke file? (0 : tidak | 1 : iya) : ");
                 int jawab = 0;
                 try{

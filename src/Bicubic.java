@@ -88,16 +88,23 @@ public class Bicubic  {
         // A = X inverse . f(x,y)
         Matrix A = multiply(Xinv,f);
 
-        // f(a,b);,
+        // f(a,b);
         double res = 0;
-        for (int k = 0; k < 16; k++){
-            int i = k % 4;
-            int j = k / 4;
-            res += A.getELMT(k, 0) * Math.pow(a,i) * Math.pow(b,j);
+        for (int k=0;k<15;k++){
+            int i = k%4;
+            int j = k/4;
+            res += A.getELMT(k, 0) * power(a,i) * power(b,j);
+            // res += A.getELMT(k, 0)*Math.pow(a,(double)i)*Math.pow(b,(double)j);
         }
 
         String hasil = String.format("Hasil interpolasi bicubic f(%f,%f) adalah %f", a, b, res);
         System.out.println(hasil);
         return hasil; 
+    }
+
+    public static void main(String[] args) {
+        Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
+        System.out.println(bicubicInterpolation(coba, 1, 1));
+
     }
 }
