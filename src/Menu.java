@@ -93,6 +93,78 @@ public class Menu {
         return Menu.m;
     }
 
+    public static Matrix askInputSPL() throws IOException{
+        System.out.println("Pilih cara masukkan untuk SPL :");
+        System.out.println("1. Input melalui terminal (keyboard)");
+        System.out.println("2. Menggunakan file txt (matrix augmented)");
+        System.out.println();
+
+        System.out.print("Pilih metode input matrix: ");
+        int actionInputMatrix = Integer.parseInt(bufferedReader.readLine());
+
+        while(actionInputMatrix < 1 || actionInputMatrix > 2){
+            System.out.println("Tolong masukkan input yang benar!");
+            System.out.print("Pilih Metode: ");
+            actionInputMatrix = Integer.parseInt(bufferedReader.readLine());
+            System.out.println();
+        }
+        
+        Matrix hasil = new Matrix();
+        if(actionInputMatrix == 1){
+            int m = 0;
+            int n = 0;
+            System.out.print("Masukkan jumlah persamaan (m): ");
+            try{
+                m = Integer.parseInt(bufferedReader.readLine());
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            System.out.print("Masukkan jumlah variabel (n): ");
+            try{
+                n = Integer.parseInt(bufferedReader.readLine());
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            Matrix augmented = new Matrix(m,n+1);
+
+            for(int i = 0; i < m; i++){
+                for(int j = 0; j < n+1; j++){
+                    if(j == n){
+                        double y = 0;
+                        try{
+                            System.out.printf("Masukkan nilai y dari persamaan (%d): ", i+1);
+                            y = Double.parseDouble(bufferedReader.readLine());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                        augmented.setELMT(i, j, y);
+
+                    }else{
+                        double x = 0;
+                        try{
+                            System.out.printf("Masukkan nilai x%d dari persamaan (%d): ", j+1, i+1);
+                            x = Double.parseDouble(bufferedReader.readLine());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                        augmented.setELMT(i, j, x);
+                    }
+                }
+            }
+            hasil = Matrix.copyMatrix(augmented);
+
+        }else if(actionInputMatrix == 2){
+            System.out.print("Masukkan path dari file yang berisi matrix: ");
+            try{
+                Menu.pathIn = bufferedReader.readLine();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            hasil  = IO.FileToMatrix(Menu.pathIn);
+        }
+        return hasil;
+    }
+
     public static Matrix askInputInterpolasi() throws IOException{
         System.out.println("Pilih cara masukkan titik untuk interpolasi :");
         System.out.println("1. Input melalui terminal (keyboard)");
@@ -224,7 +296,7 @@ public class Menu {
                 }
 
                 try{
-                    Menu.m = askInput();
+                    Menu.m = askInputSPL();
                 }catch (IOException e){
                     e.printStackTrace();
                 }

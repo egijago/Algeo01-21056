@@ -82,6 +82,5 @@ public class Interpolasi {
             System.out.println("Gagal menulis hasil ke file.");
             e.printStackTrace();
         }
-    }
-    
+    }  
 }
