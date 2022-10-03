@@ -15,9 +15,9 @@ public class RLB {
             }
         }
 
-        Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(Inverse.inverseCofactor(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
+        Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(Inverse.inverseGJ(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
 
-        b.displayMatrix();
+        double res = b.getELMT(0, 0);
         String eq = "y = ";
         for(int i = 0; i < b.getNumRow(); i++){
             if(b.getELMT(i,0) == 0){
@@ -28,6 +28,7 @@ public class RLB {
                     eq += String.format("%f",b.getELMT(0, 0));
                 }
                 else{
+                    res += input.getELMT(i-1,0)*b.getELMT(i, 0);
                     if(eq == ""){
                         eq += String.format("(%f)x%d", b.getELMT(i,0),i);
                     }else{
@@ -36,7 +37,8 @@ public class RLB {
                 }
             }
         }
-        System.out.println(eq);
-        return eq;
+        String output = eq +'\n'+ String.format("Taksiran nilai y dari regresi linier adalah: %.4f",res);
+        System.out.println(output);
+        return output;
     }
 }
