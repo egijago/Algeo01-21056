@@ -63,7 +63,7 @@
 2. Jalankan terminal
 3. Buka folder Algeo01-21056 `cd Algeo01-21056`
 4. Buka folder bin `cd bin`
-5. Masukkan command `java Main` untuk menjalankan program
+5. Masukkan command `java Menu` untuk menjalankan program
 6. File txt disimpan dalam folder "test". Untuk input dan/atau output menggunakan file, path diisi dengan "../test/<nama_file>.txt" untuk mengakses file yang ada di folder test.
 
 ### Menggunakan jar
