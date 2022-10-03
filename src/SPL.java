@@ -87,7 +87,6 @@ public class SPL {
                     matrix.setELMT(row, col, matrix.getELMT(row, col)-ratio*matrix.getELMT(i, col));
                 }
             }
-            col_lead +=1;
 
         }
         return matrix;
@@ -207,7 +206,15 @@ public class SPL {
                 }
                 else if (searchInCol(parameter,0,col+1) == -1){
                     // Variable belum di assign ke parameter
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    spl += String.format("x%d = %s\n",col+1,var[idx]);
+=======
+                    spl += String.format("x%d = %s",col+1,var[idx]) +'\n';
+>>>>>>> 9cae2d28507817b59b24c45a53db6c8096ca141e
+=======
                     spl += String.format("x%d = %s\n",col+1,var[idx]) +'\n';
+>>>>>>> ff8a0e32b32c46bc1a2da0e6144e111385ffc869
                     String[][] lst = {{String.format("%d",col+1),var[idx]}};
                     parameter = append(parameter,lst);
                     idx +=1;
@@ -239,6 +246,19 @@ public class SPL {
                 }
             }
             spl += (eq) + '\n';   
+        }
+        // Check free variable, 0 disemua baris
+        for (int col=0;col<matrix.getNumCol();col++){
+            boolean allZero = true;
+            for (int row=0;row<matrix.getNumRow();row++){
+                if (matrix.getELMT(row, col) != 0) {
+                    allZero = false;
+                    break;
+                }
+            }
+            if (allZero){
+                spl+=String.format("X%d = Free\n",col+1);
+            }
         }
         return spl;
         }
@@ -361,4 +381,13 @@ public class SPL {
         }
         return str;
     }
+<<<<<<< HEAD
+=======
+
+    public static void main(String[] args){
+        Matrix m = IO.FileToMatrix("../test/test3b.txt");
+        // ref(m).displayMatrix();
+        System.out.println(gaussJordan(m));
+    }
+>>>>>>> 147fe3e684b480d69994ca939fb7843912fd7ea0
 }
