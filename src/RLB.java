@@ -1,5 +1,5 @@
 public class RLB {
-    public static String regression(Matrix matrix){
+    public static String regression(Matrix matrix, Matrix input){
         int row = matrix.getNumRow();
         int col = matrix.getNumCol();
 
