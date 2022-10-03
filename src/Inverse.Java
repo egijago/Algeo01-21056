@@ -55,4 +55,10 @@ public class Inverse {
     public static void fileInverse(Matrix matrix, String path){
         IO.MatrixToFile(matrix, path);
     }
+
+    public static void main(String[] args) {
+        Matrix testing = IO.FileToMatrix("../test/testinvers.txt");
+        Matrix hasil = inverseGJ(testing);
+        fileInverse(hasil, "../test/hasilinversgjssss.txt");
+    }
 }
