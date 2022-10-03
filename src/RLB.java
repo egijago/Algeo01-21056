@@ -1,5 +1,5 @@
 public class RLB {
-    public static String regression(Matrix matrix){
+    public static String regression(Matrix matrix, Matrix input){
         int row = matrix.getNumRow();
         int col = matrix.getNumCol();
 
@@ -17,8 +17,8 @@ public class RLB {
 
         Matrix b = Matrix.multiplyMatrix(Matrix.multiplyMatrix(Inverse.inverseCofactor(Matrix.multiplyMatrix(Matrix.transpose(x), x)), Matrix.transpose(x)),y);
 
-        b.displayMatrix();
         String eq = "y = ";
+        double res = b.getELMT(0, 0);
         for(int i = 0; i < b.getNumRow(); i++){
             if(b.getELMT(i,0) == 0){
                 continue;
@@ -28,6 +28,7 @@ public class RLB {
                     eq += String.format("%.4f",b.getELMT(0, 0));
                 }
                 else{
+                    res += input.getELMT(0, i-1) * b.getELMT(i, 0);
                     if(eq == ""){
                         eq += String.format("(%.4f)x%d", b.getELMT(i,0),i);
                     }else{
@@ -35,7 +36,10 @@ public class RLB {
                     }
                 }
             }
+
         }
+        String hasil = String.format("\nHasil taksiran nilai y dari regresi linier: %.4f\n",res);
+        eq += hasil;
         System.out.println(eq);
         return eq;
     }

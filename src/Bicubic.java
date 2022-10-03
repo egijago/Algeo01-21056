@@ -78,7 +78,6 @@ public class Bicubic  {
                 X.setELMT(row, col, power(x,i) * power(y,j));
             }
         }
-        X.displayMatrix();
         // X inverse
         Matrix Xinv = inverseGJLS(X);
         // matrix f(x,y)
@@ -92,21 +91,13 @@ public class Bicubic  {
 
         // f(a,b);
         double res = 0;
-        for (int k = 0 ; k < 15; k++){
+        for (int k = 0 ; k < 16; k++){
             int i = k % 4;
             int j = k / 4;
-            res += A.getELMT(k, 0) * power(a,i) * power(b,j);
-            // res += A.getELMT(k, 0)*Math.pow(a,(double)i)*Math.pow(b,(double)j);
+            res += A.getELMT(k, 0) * Math.pow(a,i) * Math.pow(b,j);
         }
 
         String hasil = String.format("Hasil interpolasi bicubic f(%.4f,%.4f) adalah %f", a, b, res);
-        System.out.println(hasil);
         return hasil; 
-    }
-
-    public static void main(String[] args) {
-        Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
-        System.out.println(bicubicInterpolation(coba, 0.5, 0.5));
-
     }
 }

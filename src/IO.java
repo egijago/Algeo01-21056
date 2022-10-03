@@ -195,10 +195,4 @@ public class IO {
         return x;
     }
 
-    // public static void inputInterpolasi(Matrix matrix, double absis){
-
-    // }
-
-    public static void main(String[] args){
-    }
 }

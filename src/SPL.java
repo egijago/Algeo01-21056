@@ -215,19 +215,19 @@ public class SPL {
                 // Variable sudah di assing ke parameter
                 if (eq==""){
                     double coef = -1 * matrix.getELMT(row, col);
-                    eq += String.format("(%.3f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
+                    eq += String.format("(%.4f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
                 else {
                     double coef = -1 * matrix.getELMT(row, col);
-                    eq += String.format("+ (%.3f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
+                    eq += String.format("+ (%.4f)%s",coef,parameter[searchInCol(parameter,0,col+1)][1]);
                 }
             }
             if (eq==""){
                 if (matrix.getELMT(row, col_lead)==0){
-                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("0 = ",col_lead+1) + eq+ String.format("(%.4f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 else{
-                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("(%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("(%.4f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
                 }
             else {
@@ -235,7 +235,7 @@ public class SPL {
                     eq = String.format("x%d = ",col_lead+1) + eq;
                 }
                 else {
-                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("+ (%.3f)",matrix.getELMT(row, matrix.getNumCol()-1));
+                    eq = String.format("x%d = ",col_lead+1) + eq + String.format("+ (%.4f)",matrix.getELMT(row, matrix.getNumCol()-1));
                 }
             }
             spl += (eq) + '\n';   
@@ -250,16 +250,12 @@ public class SPL {
                 }
             }
             if (allZero){
-                spl+=String.format("X%d = Free\n",col+1);
+                spl+=String.format("x%d = Free\n",col+1);
             }
         }
         return spl;
         }
         
-    
-//------------------------------------------------------
-//--------------------Cramer----------------------------
-//------------------------------------------------------
     public static Matrix replaceCol(Matrix matrix, Matrix rep, int col){
         int kolom = matrix.getNumRow();
         Matrix copy = Matrix.copyMatrix(matrix);
@@ -292,18 +288,14 @@ public class SPL {
                 if(print){
                     System.out.println("Hasil SPL:");
                     for(int i=0; i<n; i++){
-                        System.out.printf("x%d = %.3f\n",i+1,result.getELMT(0, i));
+                        System.out.printf("x%d = %.4f\n",i+1,result.getELMT(0, i));
                 }
                 }
             }else{
-                if(print){
-                    System.out.println("Matrix tidak memiliki solusi tunggal, silakan coba metode lain untuk penyelesaian.");
-                }
+                System.out.println("Matrix tidak memiliki solusi tunggal.");
             }
         }else{
-            if(print){
-                System.out.println("Matrix tidak berbentuk persegi, persoalan tidak dapat diselesaikan dengan cramer.");
-            }
+            System.out.println("Matrix tidak berbentuk persegi.");
         }
         return result;
     }
@@ -337,40 +329,60 @@ public class SPL {
                 }
                 for (int i =0;i<row;i++)
                 {
-                    System.out.printf("x%d= %f\n",i+1,hasil.getELMT(0, i));
+                    System.out.printf("x%d = %.4f\n",i+1,hasil.getELMT(0, i));
                 }
             }
             else
             {
                 System.out.println("Matriks tidak mempunyai balikan.");
-                System.out.println("SPL tidak dapat dicari dengan metode balikan. silakan coba metode lain.");
             }
         }
         else
         {
             System.out.println("Matriks tidak berbentuk square.");
-            System.out.println("Tidak dapat menyelesaikan SPL dengan matriks balikan.");
         }
         
         return hasil;
     }
 
-
-//-----------------------------------------------------------------------
-//---------------------Output File---------------------------------------
-//-----------------------------------------------------------------------
     public static String SPLInverseToString(Matrix matrix){
-        String str = "Hasil SPL:\n";
-        for(int col = 0; col < matrix.getNumCol(); col++){
-            str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
+        boolean found = false;
+        for(int i = 0; i < matrix.getNumCol(); i++){
+            if(matrix.getELMT(0, i) != 0){
+                found = true;
+                break;
+            }
+        }
+
+        String str = "";
+        if(found){
+            str += "Hasil SPL:\n";
+            for(int col = 0; col < matrix.getNumCol(); col++){
+                str += String.format("x%d= %.4f\n", col+1, matrix.getELMT(0, col));
+            }
+        }else{
+            str = "Tidak dapat menyelesaikan SPL dengan metode balikan.";
         }
         return str;
     }
 
     public static String cramerToString(Matrix matrix){
-        String str = "Hasil SPL:\n";
-        for(int col = 0; col < matrix.getNumCol(); col++){
-            str += String.format("x%d= %f\n", col+1, matrix.getELMT(0, col));
+        boolean found = false;
+        for(int i = 0; i < matrix.getNumCol(); i++){
+            if(matrix.getELMT(0, i) != 0){
+                found = true;
+                break;
+            }
+        }
+
+        String str = "";
+        if(found){
+            str += "Hasil SPL:\n";
+            for(int col = 0; col < matrix.getNumCol(); col++){
+                str += String.format("x%d= %.4f\n", col+1, matrix.getELMT(0, col));
+            }
+        }else{
+            str = "Tidak dapat menyelesaikan SPL dengan metode cramer.";
         }
         return str;
     }

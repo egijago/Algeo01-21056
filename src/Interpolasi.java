@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Interpolasi {
-    
+
     public static double Interpolation(Matrix titik, double absis){
         Matrix x = new Matrix(titik.getNumRow(), titik.getNumRow()+1);
 
@@ -27,13 +27,13 @@ public class Interpolasi {
         String fx = "f(x) = ";
         for(int i = 0; i < result.getNumCol(); i++){
             if(i == 0){
-                fx += String.format("%f + ", result.getELMT(0,i));
+                fx += String.format("%.4f + ", result.getELMT(0,i));
             }else if(i == 1){
-                fx += String.format("(%f)x + ",result.getELMT(0,i));
+                fx += String.format("(%.4f)x + ",result.getELMT(0,i));
             }else if(i > 1 && i < result.getNumCol()-1){
-                fx += String.format("(%f)x^%d + ", result.getELMT(0,i),i);
+                fx += String.format("(%.4f)x^%d + ", result.getELMT(0,i),i);
             }else if(i == result.getNumCol()-1){
-                fx += String.format("(%f)x^%d",result.getELMT(0,i),i );
+                fx += String.format("(%.4f)x^%d",result.getELMT(0,i),i );
             }
         }
         System.out.println(fx);
@@ -58,13 +58,13 @@ public class Interpolasi {
         String str = "f(x) = ";
         for(int i = 0; i < hasil.getNumCol(); i++){
             if(i == 0){
-                str += String.format("%f + ", hasil.getELMT(0,i));
+                str += String.format("%.4f + ", hasil.getELMT(0,i));
             }else if(i == 1){
-                str += String.format("(%f)x + ",hasil.getELMT(0,i));
+                str += String.format("(%.4f)x + ",hasil.getELMT(0,i));
             }else if(i > 1 && i < hasil.getNumCol()-1){
-                str += String.format("(%f)x^%d + ", hasil.getELMT(0,i),i);
+                str += String.format("(%.4f)x^%d + ", hasil.getELMT(0,i),i);
             }else if(i == hasil.getNumCol()-1){
-                str += String.format("(%f)x^%d\n",hasil.getELMT(0,i),i );
+                str += String.format("(%.4f)x^%d\n",hasil.getELMT(0,i),i );
             }
         }
         double res = 0;
@@ -72,7 +72,7 @@ public class Interpolasi {
             res += (hasil.getELMT(0,i) * Math.pow(absis,i));
         }
 
-        str += String.format("Taksiran untuk f(%f) ialah: %f\n",absis, res);
+        str += String.format("Taksiran untuk f(%.4f) ialah: %.4f\n",absis, res);
         try{
             FileWriter writer = new FileWriter(path);
             writer.write(str);

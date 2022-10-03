@@ -92,7 +92,7 @@ public class Determinan {
     }
 
     public static void fileDeterminan(double det, String path){
-        String str = String.format("Hasil determinan matrix adalah %f",det);
+        String str = String.format("Hasil determinan matrix adalah %.4f",det);
         try{
             FileWriter writer = new FileWriter(path);
             writer.write(str);
