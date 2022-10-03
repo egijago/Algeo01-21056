@@ -83,4 +83,24 @@ public class Interpolasi {
             e.printStackTrace();
         }
     }
+    public static void main(String[] args) {
+        Matrix test = new Matrix(7,2);
+        test.setELMT(0,0,0.4);
+        test.setELMT(0,1,0.043);
+        test.setELMT(1,0,0.7);
+        test.setELMT(1,1,0.005);
+        test.setELMT(2,0,0.11);
+        test.setELMT(2,1,0.058);
+        test.setELMT(3,0,0.14);
+        test.setELMT(3,1,0.072);
+        test.setELMT(4,0,0.17);
+        test.setELMT(4,1,0.1);
+        test.setELMT(5,0,0.2);
+        test.setELMT(5,1,0.13);
+        test.setELMT(6,0,0.23);
+        test.setELMT(6,1,0.147);
+        
+        fileInterpolation(test, 0.2, "../test/hasilinterpolasi1.txt");
+    }
+    
 }

@@ -1,5 +1,4 @@
 public class Bicubic  {
-
     public static Matrix bindHorizontal(Matrix m1, Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(),m1.getNumCol()+m2.getNumCol());
         for (int i = 0; i < m1.getNumRow(); i++){
@@ -13,11 +12,11 @@ public class Bicubic  {
         return temp;
     }
 
-    public static Matrix cutCol(Matrix matrix, int c1, int c2){
-        Matrix temp = new Matrix(matrix.getNumRow(), c2 - c1 + 1);
-        for (int i = 0; i < matrix.getNumRow(); i++){
-            for (int j = 0; j < (c2 - c1 + 1); j++){
-                temp.setELMT(i, j, matrix.getELMT(i, j + c1));
+    public static Matrix cutCol(Matrix matrix,int c1, int c2){
+        Matrix temp = new Matrix(matrix.getNumRow(), c2-c1+1);
+        for (int i = 0;i<matrix.getNumRow();i++){
+            for (int j =0;j<c2-c1+1;j++){
+                temp.setELMT(i, j, matrix.getELMT(i, j+c1));
             }
         }
         return temp;
@@ -25,9 +24,9 @@ public class Bicubic  {
 
     public static Matrix identity(int n){
         Matrix temp = new Matrix(n, n);
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                if (i == j){
+        for (int i =0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if (i==j){
                     temp.setELMT(i, j, 1);
                 } else{
                     temp.setELMT(i, j, 0);
@@ -37,13 +36,13 @@ public class Bicubic  {
         return temp;
     }
 
-    static Matrix multiply(Matrix m1, Matrix m2){
+    static Matrix multiply(Matrix m1,Matrix m2){
         Matrix temp = new Matrix(m1.getNumRow(), m2.getNumCol());
-        for (int i = 0 ; i < m1.getNumRow(); i++){
-            for (int j = 0; j < m2.getNumCol(); j++){
+        for (int i=0;i<m1.getNumRow();i++){
+            for (int j =0;j<m2.getNumCol();j++){
                 temp.setELMT(i, j, 0);
-                for (int k = 0; k < m2.getNumRow(); k++){
-                    temp.setELMT(i, j, temp.getELMT(i, j) + (m1.getELMT(i, k) * m2.getELMT(k, j)));
+                for (int k = 0;k<m2.getNumRow();k++){
+                    temp.setELMT(i, j, temp.getELMT(i, j)+(m1.getELMT(i, k)*m2.getELMT(k, j)));
                 }
             }
         }
@@ -60,26 +59,29 @@ public class Bicubic  {
 
     static double power(double val, int n){
         double res = 1;
-        for (int i = 0 ; i <= n; i++){
+        for (int i =0;i<=n;i++){
             res *= val;
         }
         return res;
     }
 
     static String bicubicInterpolation(Matrix matrix,double a,double b){
+        // akan dicari melalui ekspresi f(x,y) = X.A;
+        // arrange matrix X;
         Matrix X = new Matrix(16, 16);
-        for (int row = 0 ; row < 16; row++){
-            int x = (row % 4) - 1;
-            int y = (row / 4) - 1;
-            for (int col = 0; col < 16; col++){
-                int i = (col % 4) -1;
-                int j = (col / 4) -1;
+        for (int row=0 ;row<16;row++){
+            int x = (row%4)-1;
+            int y = (row/4)-1;
+            for (int col =0;col<16;col++){
+                int i = (col%4)-1;
+                int j = (col/4)-1;
                 X.setELMT(row, col, power(x,i) * power(y,j));
             }
         }
-
         X.displayMatrix();
+        // X inverse
         Matrix Xinv = inverseGJLS(X);
+        // matrix f(x,y)
         Matrix f = new Matrix(16, 1);
         for (int i = 0 ; i < 16; i++){
             f.setELMT(i, 0, matrix.getELMT(i % 4, i / 4));;
@@ -100,5 +102,11 @@ public class Bicubic  {
         String hasil = String.format("Hasil interpolasi bicubic f(%.4f,%.4f) adalah %f", a, b, res);
         System.out.println(hasil);
         return hasil; 
+    }
+
+    public static void main(String[] args) {
+        Matrix coba = IO.FileToMatrix("../test/bicubic.txt");
+        System.out.println(bicubicInterpolation(coba, 0.5, 0.5));
+
     }
 }
