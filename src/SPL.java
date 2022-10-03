@@ -87,7 +87,6 @@ public class SPL {
                     matrix.setELMT(row, col, matrix.getELMT(row, col)-ratio*matrix.getELMT(i, col));
                 }
             }
-            col_lead +=1;
 
         }
         return matrix;
@@ -207,7 +206,7 @@ public class SPL {
                 }
                 else if (searchInCol(parameter,0,col+1) == -1){
                     // Variable belum di assign ke parameter
-                    spl += String.format("x%d = %s\n",col+1,var[idx]) +'\n';
+                    spl += String.format("x%d = %s\n",col+1,var[idx]);
                     String[][] lst = {{String.format("%d",col+1),var[idx]}};
                     parameter = append(parameter,lst);
                     idx +=1;
@@ -239,6 +238,19 @@ public class SPL {
                 }
             }
             spl += (eq) + '\n';   
+        }
+        // Check free variable, 0 disemua baris
+        for (int col=0;col<matrix.getNumCol();col++){
+            boolean allZero = true;
+            for (int row=0;row<matrix.getNumRow();row++){
+                if (matrix.getELMT(row, col) != 0) {
+                    allZero = false;
+                    break;
+                }
+            }
+            if (allZero){
+                spl+=String.format("X%d = Free\n",col+1);
+            }
         }
         return spl;
         }
@@ -363,5 +375,8 @@ public class SPL {
     }
 
     public static void main(String[] args){
+        Matrix m = IO.FileToMatrix("../test/test3b.txt");
+        // ref(m).displayMatrix();
+        System.out.println(gaussJordan(m));
     }
 }
