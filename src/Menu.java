@@ -552,13 +552,6 @@ public class Menu {
                 System.out.println("Penyelesaian masalah Regresi Linier Berganda");
                 System.out.println();
 
-                
-                try{
-                    Menu.m = askInput();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-
                 System.out.println("Pilih cara masukkan matrix: ");
                 System.out.println("1. Input melalui terminal");
                 System.out.println("2. Menggunakan file txt");
