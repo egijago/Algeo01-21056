@@ -416,7 +416,7 @@ public class Menu {
                 double x = IO.TitikInterpolasiToAbsis(hasil);
 
                 double fx = Interpolasi.Interpolation(titik, x);
-                System.out.printf("Taksiran untuk f(%f) ialah: %f\n",x, fx);
+                System.out.printf("Taksiran untuk f(%.4f) ialah: %.4f\n",x, fx);
 
 
                 System.out.println();
