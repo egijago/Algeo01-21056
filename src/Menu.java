@@ -224,6 +224,7 @@ public class Menu {
                 }
 
                 try{
+                    System.out.println("Masukkan matrix dalam bentuk matrix augmented");
                     Menu.m = askInput();
                 }catch (IOException e){
                     e.printStackTrace();
@@ -415,7 +416,7 @@ public class Menu {
                 double x = IO.TitikInterpolasiToAbsis(hasil);
 
                 double fx = Interpolasi.Interpolation(titik, x);
-                System.out.printf("Taksiran untuk f(%f) ialah: %f\n",x, fx);
+                System.out.printf("Taksiran untuk f(%.4f) ialah: %.4f\n",x, fx);
 
 
                 System.out.println();
@@ -618,7 +619,7 @@ public class Menu {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         mainMenu();
     }

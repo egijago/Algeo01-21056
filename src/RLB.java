@@ -25,13 +25,13 @@ public class RLB {
             }
             else{
                 if (i==0){
-                    eq += String.format("%f",b.getELMT(0, 0));
+                    eq += String.format("%.4f",b.getELMT(0, 0));
                 }
                 else{
                     if(eq == ""){
-                        eq += String.format("(%f)x%d", b.getELMT(i,0),i);
+                        eq += String.format("(%.4f)x%d", b.getELMT(i,0),i);
                     }else{
-                        eq += String.format(" + (%f)x%d", b.getELMT(i,0),i);
+                        eq += String.format(" + (%.4f)x%d", b.getELMT(i,0),i);
                     }
                 }
             }

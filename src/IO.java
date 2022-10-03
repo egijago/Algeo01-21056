@@ -1,12 +1,8 @@
-import java.io.File;  
-import java.io.FileNotFoundException;  
 import java.util.Scanner;
-import java.io.FileWriter;   
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.*;
 
 public class IO {
+
     public static Matrix append(Matrix list1, Matrix list2){
         Matrix temp = new Matrix(1,list1.getNumCol()+list2.getNumCol());
         for(int i = 0; i < list1.getNumCol(); i++){
@@ -45,9 +41,9 @@ public class IO {
         for(int row = 0; row < matrix.getNumRow(); row++){
             for(int col = 0; col < matrix.getNumCol(); col++){
                 if(col == matrix.getNumCol()-1){
-                    str += String.format("%f\n", matrix.getELMT(row,col));
+                    str += String.format("%.4f\n", matrix.getELMT(row,col));
                 }else{
-                    str += String.format("%f ", matrix.getELMT(row,col));
+                    str += String.format("%.4f ", matrix.getELMT(row,col));
                 }
             }
         }

@@ -7,7 +7,7 @@ public class Determinan {
 
     public static Matrix subMatrix(Matrix matrix, int xRow, int xCol){
         int n = matrix.getNumRow();
-        Matrix temp = new Matrix(n-1,n-1);
+        Matrix temp = new Matrix(n-1, n-1);
 
         int idxRow = 0; 
         
@@ -103,5 +103,4 @@ public class Determinan {
             e.printStackTrace();
         }
     }
-
 }

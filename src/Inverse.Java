@@ -1,4 +1,5 @@
 public class Inverse {
+
     public static Matrix inverseGJ (Matrix matrix){
         int n = matrix.getNumRow();
         Matrix invers = new Matrix(n,n*2);
@@ -19,6 +20,7 @@ public class Inverse {
                 }
             }
         }
+
         invers = SPL.rref(invers);
 
         for(int i = 0; i < n; i++){
@@ -54,11 +56,5 @@ public class Inverse {
 
     public static void fileInverse(Matrix matrix, String path){
         IO.MatrixToFile(matrix, path);
-    }
-
-    public static void main(String[] args) {
-        Matrix testing = IO.FileToMatrix("../test/testinvers.txt");
-        Matrix hasil = inverseGJ(testing);
-        fileInverse(hasil, "../test/hasilinversgjssss.txt");
     }
 }

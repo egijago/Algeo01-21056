@@ -374,13 +374,10 @@ public class SPL {
         }
         return str;
     }
-<<<<<<< HEAD
-=======
 
     public static void main(String[] args){
         Matrix m = IO.FileToMatrix("../test/test3b.txt");
         // ref(m).displayMatrix();
         System.out.println(gaussJordan(m));
     }
->>>>>>> 147fe3e684b480d69994ca939fb7843912fd7ea0
 }

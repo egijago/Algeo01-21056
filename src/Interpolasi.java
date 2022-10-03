@@ -1,6 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+
 public class Interpolasi {
+    
     public static double Interpolation(Matrix titik, double absis){
         Matrix x = new Matrix(titik.getNumRow(), titik.getNumRow()+1);
 
