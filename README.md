@@ -1,8 +1,14 @@
 # Algeo01-21056
 
 <p>&nbsp;</p>
-
-**TUBES ALGEO MAHA ASYIK MAHA ANJAY MAHA ENJOY** 
+Matrix Calculator Written in Java language
+Fitur-fitur: 
+- penjumlahan dan perkalian matrix
+- mencari inverse matrix
+- mencari determinan matrix
+- melakukan regresi linear
+- melakukan interpolasi linear dan interpolasi bikubik
+- memecahkan sistem persamaan linear multivariabel
 
 ## File Structure
 
